@@ -1,0 +1,28 @@
+{
+  "name": "loveat2",
+  "version": "1.0.0",
+  "description": "a website for breakfast boss and customer",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creek0810/loveat2.git"
+  },
+  "author": "creek0810",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/creek0810/loveat2/issues"
+  },
+  "homepage": "https://github.com/creek0810/loveat2#readme",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}

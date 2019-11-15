@@ -1,0 +1,7 @@
+main.pyc
+node_modules/
+client-secret.json
+__pycache__
+.pytest_cache
+config.py
+config.pyc
