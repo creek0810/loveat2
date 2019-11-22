@@ -2,6 +2,8 @@ import config
 
 from flask import Flask
 
+from lib.auth import login_manager
+
 from views import (
     menu_api,
     menu_web,
@@ -31,6 +33,7 @@ def register_api(app):
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
+    login_manager.init_app(app)
     register_api(app)
     register_web(app)
     return app
