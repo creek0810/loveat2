@@ -62,7 +62,7 @@ def validate_user(data, email=False, password=False):
             "_id": 1,
             "password": 1
         })
-        if check_password_hash(user["password"], data["password"]):
+        if user and check_password_hash(user["password"], data["password"]):
             return user["_id"]
     return None
 
