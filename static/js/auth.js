@@ -22,7 +22,7 @@ async function login() {
     });
     if (result.status === 401) {
       // show wrong msg
-      document.getElementById('login-wrong').innerText = 'Wrong user name or password.';
+      document.getElementById('login-wrong').innerText = '帳號或密碼錯誤';
     } else {
       // refresh page
       window.location.reload();
