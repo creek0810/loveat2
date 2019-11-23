@@ -19,6 +19,7 @@ jobs:
     script:
     - npm run test
   - stage: deploy
+    if: branch = master AND fork = false
     python: 3.7
     script: echo "Deploying to gae ..."
     install:
