@@ -19,7 +19,7 @@ jobs:
     script:
     - npm run test
   - stage: deploy
-    if: branch = master AND repo = creek0810/loveat2
+    if: branch = master AND repo = creek0810/loveat2 AND fork = false
     python: 3.7
     script: echo "Deploying to gae ..."
     install:
