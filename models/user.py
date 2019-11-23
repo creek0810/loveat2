@@ -21,7 +21,7 @@ def add(data):
             "email": data["email"],
             "birth": data["birth"],
             "role": data["role"],
-            "avatar": Binary(b'0')
+            "avatar": Binary(b'')
         })
         return True
     else:
@@ -33,7 +33,7 @@ def find(id, profile=False):
         projection = {
             "password": 0,
             "role": 0,
-            "toke": 0
+            "token": 0
         }
     else:
         projection = {
