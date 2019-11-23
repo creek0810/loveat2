@@ -1,0 +1,20 @@
+/*///////////////////general setting////////////////*/
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+html, body {
+    height: 100%;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.app {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    min-height: 0;
+    flex-grow: 1;
+    padding: 1rem;
+}
+.wrong-msg {
+    color: red;
+}

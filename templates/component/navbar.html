@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Ton80</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if url == "customer" %}
+        <li class="nav-item {{ 'active' if active_page == 'menu' else '' }}">
+            <a class="nav-link" href="{{ url_for('menu_web.menu') }}">菜單</a>
+        </li>
+        <li class="nav-item {{ 'active' if active_page == 'cart' else '' }}">
+            <a class="nav-link" href="{{ url_for('order_web.cart') }}">點菜單(購物車)</a>
+        </li>
+        {% if auth != "anonymous" %}
+        <li class="nav-item {{ 'active' if active_page == 'order_state' else '' }}">
+            <a class="nav-link" href="{{ url_for('order_web.state') }}">訂單狀態</a>
+        </li>
+        {% endif %}
+      {% else %}
+        <li class="nav-item {{ 'active' if active_page == 'order' else '' }}">
+          <a class="nav-link" href="{{ url_for('order_web.pending')}}">顧客點餐</a>
+        </li>
+        <li class="nav-item {{ 'active' if active_page == 'todo' else '' }}">
+          <a class="nav-link" href="{{ url_for('order_web.todo') }}">餐點製作清單</a>
+        </li>
+        <li class="nav-item {{ 'active' if active_page == 'history' else '' }}">
+          <a class="nav-link" href="{{ url_for('order_web.history') }}">歷史點菜單</a>
+        </li>
+        <li class="nav-item {{ 'active' if active_page == 'menu-edit' else '' }}">
+          <a class="nav-link" href="{{ url_for('menu_web.edit_menu') }}">編輯菜單</a>
+        </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav ml-auto">
+    {% if auth == "anonymous" %}
+      <li class="nav-item active">
+          <a class="nav-link" href="#login-modal" data-toggle="modal">登入</a>
+      </li>
+      <li class="nav-item active">
+          <a class="nav-link" href="#register-modal" data-toggle="modal">註冊</a>
+      </li>
+    {% else %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('user_web.logout') }}">登出</a>
+        </li>
+        <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                你好 {{name}}
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('user_web.profile', id=id) }}">個人資料</a>
+                {% if auth == "admin" %}
+                    <a class="dropdown-item" href="{{ url_for('order_web.pending') }}">管理頁面</a>
+                    <a class="dropdown-item" href="{{ url_for('setting_web.business_time') }}">設定點餐時間</a>
+                {% endif %}
+            </div>
+        </li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
