@@ -25,6 +25,10 @@ jobs:
     - pip install pipenv
     before_deploy:
     - pipenv lock -r > requirements.txt
+    before_install:
+    - openssl aes-256-cbc -K $encrypted_caace5a6e9e3_key -iv $encrypted_caace5a6e9e3_iv
+      -in secrets.tar.enc -out secrets.tar -d
+    - tar xvf secrets.tar
     deploy:
       provider: gae
       skip_cleanup: true
@@ -32,7 +36,3 @@ jobs:
       project: loveat2
       on:
         branch: master
-before_install:
-- openssl aes-256-cbc -K $encrypted_caace5a6e9e3_key -iv $encrypted_caace5a6e9e3_iv
-  -in secrets.tar.enc -out secrets.tar -d
-- tar xvf secrets.tar
