@@ -37,7 +37,8 @@ def find(id, profile=False):
         }
     else:
         projection = {
-            "role": 1
+            "role": 1,
+            "userName": 1
         }
     return USER_COLLECTION.find_one({
         "_id": ObjectId(id)

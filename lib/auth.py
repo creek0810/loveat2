@@ -13,6 +13,7 @@ from models import user
 class Anonymous(AnonymousUserMixin):
     def __init__(self):
         self.role = "anonymous"
+        self.name = "anonymous"
         self.id = "anonymous"
 
     def get_role(self):
@@ -23,6 +24,7 @@ class User(UserMixin):
     def __init__(self, id):
         result = user.find(id)
         self.id = id
+        self.name = result["userName"]
         self.role = result["role"]
 
     def get_role(self):
