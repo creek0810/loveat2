@@ -1,5 +1,7 @@
 from functools import wraps
 
+from flask import abort
+
 from flask_login import (
     AnonymousUserMixin,
     LoginManager,
@@ -46,5 +48,5 @@ def admin_required(f):
         if current_user.is_authenticated and current_user.role == "admin":
             return f(*args, **kwargs)
         else:
-            return login_manager.unauthorized()
+            abort(403)
     return wrap
