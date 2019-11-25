@@ -2,6 +2,8 @@ import config
 
 from flask import Flask
 
+from flask_cors import CORS
+
 from lib.auth import login_manager
 
 from views import (
@@ -34,6 +36,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
     login_manager.init_app(app)
+    CORS(app, supports_credentials=True)
     register_api(app)
     register_web(app)
     return app
