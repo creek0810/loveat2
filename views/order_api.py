@@ -10,7 +10,14 @@ order_api = Blueprint('order_api', __name__)
 @order_api.route('/history', methods=["GET"])
 def history():
     args = request.args
-    start = request.args.get('start')
     start = datetime.strptime(args.get('start'), '%Y-%m-%dT%H:%M')
     end = datetime.strptime(args.get('end'), '%Y-%m-%dT%H:%M')
-    return jsonify(order.get(start, end))
+    return jsonify(list(order.get_raw_history(start, end)))
+
+
+@order_api.route('/analysis-data', methods=["GET"])
+def analysis_data():
+    args = request.args
+    start = datetime.strptime(args.get('start'), '%Y-%m-%dT%H:%M')
+    end = datetime.strptime(args.get('end'), '%Y-%m-%dT%H:%M')
+    return jsonify(order.get_analysis_data(start, end))
