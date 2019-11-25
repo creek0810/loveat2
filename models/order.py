@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from config import URL
 
 from pymongo import MongoClient
@@ -116,3 +118,22 @@ def get_analysis_data(start, end):
             itemAnalysis["femaleTotal"] + itemAnalysis["maleTotal"]
         )
     return result
+
+
+def get_not_end_by_username(user_name):
+    return ORDER_COLLECTION.find({
+        'userName': user_name,
+        'state': {
+            '$nin': ['end']
+        },
+        'takenAt': {
+            '$gte': datetime.now() - timedelta(days=1),
+        }
+    }, {
+        '_id': 0,
+        'createdAt': 0,
+        'userName': 0,
+        'total': 0,
+        'content._id': 0,
+        'content.type': 0
+    })
