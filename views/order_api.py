@@ -2,6 +2,8 @@ from datetime import datetime
 
 from flask import Blueprint, jsonify, request
 
+from flask_login import login_required
+
 from lib.auth import admin_required
 
 from models import order
@@ -25,3 +27,16 @@ def analysis_data():
     start = datetime.strptime(args.get('start'), '%Y-%m-%dT%H:%M')
     end = datetime.strptime(args.get('end'), '%Y-%m-%dT%H:%M')
     return jsonify(order.get_analysis_data(start, end))
+
+
+@order_api.route('/new', methods=["POST"])
+@login_required
+def add_order():
+    data = request.get_json()
+    try:
+        if order.add_order(data):
+            return "", 200
+        else:
+            return "", 422
+    except KeyError:
+        return "", 422

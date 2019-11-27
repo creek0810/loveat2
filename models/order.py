@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from bson.objectid import ObjectId
+
 from config import URL
 
 from pymongo import MongoClient
@@ -8,6 +10,9 @@ DB = MongoClient(URL)["loveat2"]
 ORDER_COLLECTION = DB["order"]
 ITEM_COLLECTION = DB["item"]
 COMBO_COLLECTION = DB["combo"]
+BUSINESS_COLLECTION = DB["businessTime"]
+
+MAX_ORDERID = -1
 
 
 def find_by_time(start, end):
@@ -120,20 +125,79 @@ def get_analysis_data(start, end):
     return result
 
 
+def get_max_orderid():
+    result = list(
+        ORDER_COLLECTION.aggregate(
+            [
+                {"$addFields": {"orderID": {"$toInt": "$orderID"}}},
+                {"$group": {"_id": None, "max": {"$max": "$orderID"}}},
+            ]
+        )
+    )
+    return result[0]["max"]
+
+
 def get_not_end_by_username(user_name):
-    return ORDER_COLLECTION.find({
-        'userName': user_name,
-        'state': {
-            '$nin': ['end']
+    return ORDER_COLLECTION.find(
+        {
+            "userName": user_name,
+            "state": {"$nin": ["end"]},
+            "takenAt": {"$gte": datetime.now() - timedelta(days=1)},
         },
-        'takenAt': {
-            '$gte': datetime.now() - timedelta(days=1),
-        }
-    }, {
-        '_id': 0,
-        'createdAt': 0,
-        'userName': 0,
-        'total': 0,
-        'content._id': 0,
-        'content.type': 0
-    })
+        {
+            "_id": 0,
+            "createdAt": 0,
+            "userName": 0,
+            "total": 0,
+            "content._id": 0,
+            "content.type": 0,
+        },
+    )
+
+
+def add_order(data):
+    def build_business_time(time_str):
+        result = data["takenAt"][:-6] + "-" + time_str
+        return datetime.strptime(result, "%Y-%m-%d-%H:%M")
+
+    # init max orderid
+    global MAX_ORDERID
+    if MAX_ORDERID == -1:
+        MAX_ORDERID = get_max_orderid()
+
+    # check if takenAt is in business time insterval
+    taken_at = datetime.strptime(data["takenAt"], "%Y-%m-%dT%H:%M")
+    business_time = list(BUSINESS_COLLECTION.find_one({}, {"_id": 0}).values())
+    business_time = business_time[taken_at.isoweekday() - 1]
+    start = build_business_time(business_time["start"])
+    end = build_business_time(business_time["end"])
+
+    if start <= taken_at <= end:
+        MAX_ORDERID += 1
+        for meal in data["content"]:
+            meal["id"] = ObjectId(meal["id"])
+            if meal["category"] == "item":
+                tar = ITEM_COLLECTION.find_one(
+                    {"_id": meal["id"]}, {"name": 1}
+                )
+            else:
+                tar = COMBO_COLLECTION.find_one(
+                    {"_id": meal["id"]}, {"name": 1}
+                )
+            meal["name"] = tar["name"]
+
+        ORDER_COLLECTION.insert_one(
+            {
+                "userName": data["userName"],
+                "notes": data["notes"],
+                "total": data["total"],
+                "contet": data["content"],
+                "state": "unknown",
+                "createdAt": datetime.now(),
+                "takenAt": taken_at,
+                "orderID": str(MAX_ORDERID),
+            }
+        )
+        return True
+    else:
+        return False
