@@ -19,6 +19,7 @@ def history():
     args = request.args
     start = datetime.strptime(args.get("start"), "%Y-%m-%dT%H:%M")
     end = datetime.strptime(args.get("end"), "%Y-%m-%dT%H:%M")
+    print("=============================")
     return jsonify(list(order.get_raw_history(start, end)))
 
 

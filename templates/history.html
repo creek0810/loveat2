@@ -1,0 +1,191 @@
+{% extends "layout.html" %}
+{% set active_page = "history" %}
+{% set url = "boss" %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="{{ url_for('static', filename='js/history-data-chart.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/history-data.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="full-container">
+        <div class="search-container">
+            <div class="form-group">
+                <label for="start-time">開始時間</label>
+                <input type="datetime-local" class="form-control" id="start-time" value={{begin}}>
+            </div>
+            <div class="form-group">
+                <label for="end-time">結束時間</label>
+                <input type="datetime-local" class="form-control" id="end-time" value = {{end}}>
+            </div>
+            <button class="btn btn-primary" id="history-time-send">查詢</button>
+        </div>
+        <div class="result-container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab">歷史點菜單</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">餐點銷售情況</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">年齡層與性別的銷售情況</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="history" role="tabpanel" >
+                    <table class="table fixed-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>序號</th>
+                                <th>下訂單時間</th>
+                                <th>數量及項目</th>
+                                <th>備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-tbody">
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    2019/10/10<br>
+                                    09:00
+                                </td>
+                                <td>
+                                    1 * 巧克力吐司<br>
+                                    2 * 冰紅茶
+                                </td>
+                                <td>
+                                    紅茶要去冰
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="toggle-btn-container">
+                        <button class="btn btn-primary" id="item-analysis-btn">切換詳細資料</button>
+                    </div>
+                    <div id="item-analysis-table">
+                        <table class="table fixed-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>項目</th>
+                                    <th>數量</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profile-tbody">
+                                <tr>
+                                    <td>紅茶</td>
+                                    <td>
+                                       100
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="item-analysis-chart" class="hidden">
+                        <div class="chart-container">
+                            <div class="canvas-container-item">
+                                <canvas id="item-bar-chart">
+
+                                </canvas>
+                            </div>
+                        </div>
+						<div class="chart-container">
+                            <div class="canvas-container-item">
+                                <canvas id="item-pie-chart">
+
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="toggle-btn-container">
+                        <div class="checkbox-container">
+                            <input type="checkbox" name="" id="gender-check" checked>性別
+                            <input type="checkbox" name="" id="age-check" checked>年齡
+                        </div>
+                        <button class="btn btn-primary" id="gender-analysis-btn">切換詳細資料</button>
+                    </div>
+                    <div id="gender-analysis-table">
+                        <table class="table fixed-table">
+                            <thead class="thead-dark" id="contact-thead">
+                                <tr>
+                                    <th>品項</th>
+                                    <th>0-9</th>
+                                    <th>10-19</th>
+                                    <th>20-29</th>
+                                    <th>30-39</th>
+                                    <th>40-49</th>
+                                    <th>50-59</th>
+                                    <th>60+</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contact-tbody">
+                                <tr>
+                                    <td>紅茶</td>
+                                    <td>
+                                       50
+                                    </td>
+                                    <td>
+                                       40
+                                    </td>
+                                    <td>
+                                       40
+                                    </td>
+                                    <td>
+                                       40
+                                    </td>
+                                    <td>
+                                       40
+                                    </td>
+                                    <td>
+                                       40
+                                    </td>
+                                    <td>
+                                       40
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="gender-analysis-chart" class="hidden">
+                        <div class="chart-container">
+                            <div class="canvas-container-gender">
+                                <canvas id="female-pie-chart">
+
+                                </canvas>
+								<h6>女性各年齡人數</h6>
+                            </div>
+                            <div class="canvas-container-gender">
+                                <canvas id="male-pie-chart">
+
+                                </canvas>
+								<h6>男性各年齡人數</h6>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <div class="canvas-container-gender">
+                                <canvas id="gender-pie-chart">
+
+                                </canvas>
+								<h6>男女人數比</h6>
+                            </div>
+							<div class="canvas-container-gender">
+                                <canvas id="age-pie-chart">
+
+                                </canvas>
+								<h6>各年齡人數</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

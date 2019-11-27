@@ -1,0 +1,313 @@
+{% extends "layout.html" %} {% set active_page = "menu-edit" %} {% set url = "boss" %} {% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/menu-edit.css') }}"> {% endblock %} {% block content %}
+<div class="edit-menu-container">
+    <div class="op-container">
+        <div class="category-container">
+            <div class="from-group form-inline">
+                <select name="" id="" class="form-control">
+                <option value="">全部</option>
+                <option value="">飲料</option>
+                <option value="">漢堡</option>
+                <option value="">三明治</option>
+                <option value="">蛋餅</option>
+                <option value="">套餐</option>
+            </select>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" id="edit-category">編輯種類</button>
+            </div>
+        </div>
+        <div class="add-op-container">
+            <button class="btn btn-primary">
+                <a href="{{ url_for('menu_web.add_item') }}">
+                新增單品
+                </a>
+            </button>
+            <button class="btn btn-primary">
+                <a href="{{ url_for('menu_web.add_combo') }}">
+                新增套餐
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="full-container">
+        <div class="table-container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>名稱</th>
+                        <th>價格</th>
+                        <th>內容</th>
+                        <th>照片</th>
+                        <th>說明</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>超值套餐</td>
+                        <td>55</td>
+                        <td>
+                            1 * 紅茶 <br> 1 * 乳酪蛋餅
+                        </td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>超划算的，快來買</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_combo') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>紅茶</td>
+                        <td>30</td>
+                        <td>1 * 紅茶</td>
+                        <td>
+                            <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+                        </td>
+                        <td>這是一杯好喝的紅茶</td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a href="{{ url_for('menu_web.edit_item') }}">
+                                    修改
+                                </a>
+                                </button>
+                            <button class="btn btn-primary">刪除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">編輯種類</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-inline padding5">
+                        <div class="form-group">
+                            <label for="inputPassword6">新增種類</label>
+                            <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+                            <select name="" id="" class="form-control mx-sm-3">
+                        <option value="">單品</option>
+                        <option value="">套餐</option>
+                    </select>
+                            <button class="btn btn-primary">新增</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-inline padding5">
+                        <div class="form-group">
+                            <label for="inputPassword6">修改種類</label>
+                            <select name="" id="" class="form-control mx-sm-3">
+                        <option value="">飲料</option>
+                        <option value="">漢堡</option>
+                        <option value="">三明治</option>
+                        <option value="">蛋餅</option>
+                        <option value="">套餐</option>
+                    </select>
+                            <input type="text" name="" id="" class="form-control mx-sm-3">
+                            <button class="btn btn-primary">修改</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-inline padding5">
+                        <div class="form-group">
+                            <label for="inputPassword6">刪除種類</label>
+                            <select name="" id="" class="form-control mx-sm-3">
+                        <option value="">飲料</option>
+                        <option value="">漢堡</option>
+                        <option value="">三明治</option>
+                        <option value="">蛋餅</option>
+                        <option value="">套餐</option>
+                    </select>
+                            <button class="btn btn-primary">刪除</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

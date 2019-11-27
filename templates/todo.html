@@ -1,0 +1,248 @@
+{% extends "layout.html" %}
+{% set active_page = "todo" %}
+{% set url = "boss" %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="full-container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>取餐序號</th>
+                    <th>預定取餐時間</th>
+                    <th>數量及項目</th>
+                    <th>備註</th>
+                    <th>顧客資料</th>
+                    <th>其他</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="finish">
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr><tr>
+                    <td>1</td>
+                    <td>2019/10/10<br>09:00</td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        1 * 豬肉漢堡<br>
+                        3 * 冰紅茶
+                    </td>
+                    <td>
+                        冰紅茶去冰<br>
+                        另外兩杯正常冰<br>
+                    </td>
+                    <td>
+                        0918783283<br>
+                        <a href="">詳細資料</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">製作完成</button>
+                        <button class="btn btn-primary">已取餐</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

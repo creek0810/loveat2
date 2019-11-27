@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+{% set active_page = "order_state" %}
+{% set url = "customer" %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order-state.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="full-container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>取餐序號</th>
+                    <th>指定取餐時間</th>
+                    <th>數量及項目</th>
+                    <th>目前訂單狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="finish">
+                    <td>1</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        製作完成
+                    </td>
+                </tr>
+                <tr class="doing">
+                    <td>30</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        製作中
+                    </td>
+                </tr>
+                <tr class="abort">
+                    <td>X</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        取消
+                    </td>
+                </tr>
+                <tr class="unknown">
+                    <td>?</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        未回應
+                    </td>
+                </tr>
+
+                <tr class="unknown">
+                    <td>?</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        未回應
+                    </td>
+                </tr>
+                <tr class="unknown">
+                    <td>?</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        未回應
+                    </td>
+                </tr>
+                <tr class="unknown">
+                    <td>?</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        未回應
+                    </td>
+                </tr>
+                <tr class="unknown">
+                    <td>?</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        未回應
+                    </td>
+                </tr>
+                <tr class="unknown">
+                    <td>?</td>
+                    <td>
+                        2019/10/10<br>
+                        09:00
+                    </td>
+                    <td>
+                        1 * 巧克力吐司<br>
+                        3 * 豬肉漢堡<br>
+                        2 * 冰紅茶
+                    </td>
+                    <td>
+                        未回應
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

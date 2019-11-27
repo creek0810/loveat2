@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% set active_page = "another" %}
+{% set url = "boss" %}
+
+{% block file %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/item.css') }}">
+{% endblock %}
+
+{% block header %}
+{% include 'component/boss-header.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="full-container">
+        <div class="form-container">
+            <div class="form-group">
+                <label for="name">名稱</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="name">種類</label>
+                <select id="type" class="form-control">
+                    <option value="0">飲料</option>
+                    <option value="1">漢堡</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">價格</label>
+                <input type="number" class="form-control" id="price">
+            </div>
+            <div class="form-group">
+                <label for="name">圖片</label>
+                <button class="btn btn-primary">新增圖片</button>
+            </div>
+            <div class="form-group">
+                <label for="description">說明</label>
+                <textarea id="description" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="preview-container"></div>
+
+    </div>
+{% endblock %}

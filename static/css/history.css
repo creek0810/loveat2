@@ -1,0 +1,73 @@
+.full-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    min-height: 0;
+}
+
+.search-container {
+    padding: 5px;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 127, 255, 0.5);
+    flex-flow: 0;
+    background: rgba(100, 196, 237, 0.5);
+}
+
+.result-container {
+    flex: 1;
+    max-height: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#myTabContent {
+    overflow: auto;
+}
+
+.fixed-table th {
+    position: sticky;
+    top: 0;
+}
+
+.toggle-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.canvas-container-gender {
+    width: calc(50% - 5px);
+}
+
+.canvas-container-item {
+    width: calc(100% - 5px);
+}
+
+.checkbox-container {
+    margin-right: 5px;
+}
+
+th,td {
+    text-align: center;
+	border:1px gray solid;
+}
+
+h6{
+   text-align: center;
+}

@@ -1,0 +1,26 @@
+.full-container {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+th {
+    position: sticky;
+    top: 0;
+}
+
+.finish {
+    background: #bceb3c;
+}
+
+.doing {
+    background: #1fffff;
+}
+
+.abort {
+    background: #ff5b44;
+}
+
+.unknown {
+    background: #f8aa27;
+}

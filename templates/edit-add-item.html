@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% set active_page = "menu-edit" %}
+{% set url = "boss" %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit-add-item.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="full-container">
+    {% if add %}
+        <h2>單品新增</h2>
+    {% else %}
+        <h2>單品修改</h2>
+    {% endif %}
+    <form action="">
+        <div class="form-group">
+            <label for="">名稱</label>
+            <input type="text" name="" id="" class="form-control" value="紅茶">
+        </div>
+        <div class="form-group">
+            <label for="">種類</label>
+            <select name="" id="" class="form-control">
+                <option value="" selected>飲料</option>
+                <option value="">三明治</option>
+                <option value="">漢堡</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">單價</label>
+            <input type="number" name="" id="" class="form-control" value="100">
+        </div>
+        <div class="form-group">
+            <label for="">照片</label>
+            <input type="file" name="" id="" class="form-control-file">
+        </div>
+        <div class="form-group">
+            <label for="">說明</label>
+            <textarea name="" id="" cols="30" rows="5" class="form-control">這是一杯好喝的紅茶
+            </textarea>
+        </div>
+        <div class="form-group ml-auto">
+            <button class="btn btn-primary">清空</button>
+            {% if add %}
+                <button class="btn btn-primary">品項添加</button>
+            {% else %}
+                <button class="btn btn-primary">確認修改</button>
+            {% endif %}
+
+        </div>
+    </form>
+
+    <div class="preview-container">
+        <div class="menu-item">
+            <div class="item-img-container">
+                <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+            </div>
+            <div class="detail-info-container">
+                名稱: 紅茶 <br>
+                價格: 100 <br>
+                說明: 這是一杯好喝的紅茶 <br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

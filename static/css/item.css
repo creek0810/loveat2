@@ -1,0 +1,17 @@
+.full-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.form-container {
+    flex-basis: calc(60% - 5px);
+    background: royalblue;
+}
+
+.preview-container {
+    flex-basis: calc(40% - 5px);
+    background: red;
+}

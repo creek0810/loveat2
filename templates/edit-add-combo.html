@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% set active_page = "menu-edit" %}
+{% set url = "boss" %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit-add-combo.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="full-container">
+    {% if add %}
+        <h2>套餐新增</h2>
+    {% else %}
+        <h2>套餐修改</h2>
+    {% endif %}
+    <form action="">
+        <div class="form-group form-inline">
+            <label for="">名稱</label>
+            <input type="text" name="" id="" class="form-control mx-sm-3" value="超值套餐">
+        </div>
+        <div class="form-group form-inline">
+            <label for="">種類</label>
+            <select name="" id="" class="form-control mx-sm-3">
+                <option value="" selected>套餐</option>
+                <option value="">三明治</option>
+                <option value="">漢堡</option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label for="">單價</label>
+            <input type="number" name="" id="" class="form-control mx-sm-3" value="55">
+        </div>
+        <div class="form-group">
+            <label for="">照片</label>
+            <input type="file" name="" id="" class="form-control-file">
+        </div>
+        <div class="form-group">
+            <label for="">說明</label>
+            <textarea name="" id="" cols="30" rows="2" class="form-control">超划算的，快來買
+            </textarea>
+        </div>
+        <div>品項添加</div>
+        <div class="add-item-container form-group">
+            <div class="category-container">
+                <form action="">
+                    <div class="form-group form-inline">
+                        <label for="">選擇種類</label>
+                        <select name="" id="" class="form-control mx-sm-3">
+                            <option value="">飲料</option>
+                            <option value="">三明治</option>
+                            <option value="">漢堡</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="">品項選擇</label>
+                        <select name="" id="" class="form-control mx-sm-3">
+                            <option value="">紅茶</option>
+                            <option value="">綠茶</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="">數量選擇</label>
+                        <input type="number" class="form-control mx-sm-3">
+                    </div>
+                    <button class="btn btn-primary">添加</button>
+                </form>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>名稱</th>
+                            <th>數量</th>
+                            <th>其他</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>紅茶</td>
+                            <td>1</td>
+                            <td>
+                                <button class="btn btn-primary">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>乳酪蛋餅</td>
+                            <td>1</td>
+                            <td>
+                                <button class="btn btn-primary">刪除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group ml-auto">
+            <button class="btn btn-primary">清空</button>
+            {% if add %}
+                <button class="btn btn-primary">品項添加</button>
+            {% else %}
+                <button class="btn btn-primary">確認修改</button>
+            {% endif %}
+        </div>
+    </form>
+
+    <div class="preview-container">
+        <div class="menu-item">
+            <div class="item-img-container">
+                <img src="http://www.foodsafetylife.com/laravel-filemanager/photos/shares/59f02f0f58ce2.jpg" alt="" class="item-img">
+            </div>
+            <div class="detail-info-container">
+                名稱: 超值全餐 <br>
+                價格: 55 <br>
+                品項: <br>
+                1 * 紅茶<br>
+                1 * 乳酪蛋餅<br>
+                說明: 超划算的，快來買<br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
