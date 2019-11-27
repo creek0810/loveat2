@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, jsonify, request
 
-from flask_login import login_required
+from flask_login import current_user, login_required
 
 from lib.auth import admin_required
 
@@ -33,6 +33,7 @@ def analysis_data():
 @login_required
 def add_order():
     data = request.get_json()
+    data['userName'] = current_user.name
     try:
         if order.add_order(data):
             return "", 200
