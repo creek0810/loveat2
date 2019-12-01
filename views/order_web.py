@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from flask import Blueprint, render_template
 
-from flask_login import current_user, login_required
+from flask_login import current_user
 
 from lib.auth import admin_required
 
