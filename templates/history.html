@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <script src="{{ url_for('static', filename='js/history-data-chart.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/history-data.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/history-data-chart.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -47,20 +47,6 @@
                             </tr>
                         </thead>
                         <tbody id="history-tbody">
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    2019/10/10<br>
-                                    09:00
-                                </td>
-                                <td>
-                                    1 * 巧克力吐司<br>
-                                    2 * 冰紅茶
-                                </td>
-                                <td>
-                                    紅茶要去冰
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -77,12 +63,6 @@
                                 </tr>
                             </thead>
                             <tbody id="profile-tbody">
-                                <tr>
-                                    <td>紅茶</td>
-                                    <td>
-                                       100
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -126,30 +106,6 @@
                                 </tr>
                             </thead>
                             <tbody id="contact-tbody">
-                                <tr>
-                                    <td>紅茶</td>
-                                    <td>
-                                       50
-                                    </td>
-                                    <td>
-                                       40
-                                    </td>
-                                    <td>
-                                       40
-                                    </td>
-                                    <td>
-                                       40
-                                    </td>
-                                    <td>
-                                       40
-                                    </td>
-                                    <td>
-                                       40
-                                    </td>
-                                    <td>
-                                       40
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -159,13 +115,11 @@
                                 <canvas id="female-pie-chart">
 
                                 </canvas>
-								<h6>女性各年齡人數</h6>
                             </div>
                             <div class="canvas-container-gender">
                                 <canvas id="male-pie-chart">
 
                                 </canvas>
-								<h6>男性各年齡人數</h6>
                             </div>
                         </div>
                         <div class="chart-container">
@@ -173,13 +127,11 @@
                                 <canvas id="gender-pie-chart">
 
                                 </canvas>
-								<h6>男女人數比</h6>
                             </div>
 							<div class="canvas-container-gender">
                                 <canvas id="age-pie-chart">
 
                                 </canvas>
-								<h6>各年齡人數</h6>
                             </div>
                         </div>
                     </div>

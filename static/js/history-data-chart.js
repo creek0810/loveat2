@@ -1,81 +1,55 @@
+/* global Chart */
 let tableItem = true;
 let tableGender = true;
 
 function toggleItem() {
-  if(tableItem) {
-    document.getElementById('item-analysis-table').classList.add("hidden");
-    document.getElementById('item-analysis-chart').classList.remove("hidden");
+  if (tableItem) {
+    document.getElementById('item-analysis-table').classList.add('hidden');
+    document.getElementById('item-analysis-chart').classList.remove('hidden');
   } else {
-    document.getElementById('item-analysis-table').classList.remove("hidden");
-    document.getElementById('item-analysis-chart').classList.add("hidden");
+    document.getElementById('item-analysis-table').classList.remove('hidden');
+    document.getElementById('item-analysis-chart').classList.add('hidden');
   }
   tableItem = !tableItem;
 }
 
 function toggleGender() {
-  if(tableGender) {
-    document.getElementById('gender-analysis-table').classList.add("hidden");
-    document.getElementById('gender-analysis-chart').classList.remove("hidden");
+  if (tableGender) {
+    document.getElementById('gender-analysis-table').classList.add('hidden');
+    document.getElementById('gender-analysis-chart').classList.remove('hidden');
   } else {
-    document.getElementById('gender-analysis-table').classList.remove("hidden");
-    document.getElementById('gender-analysis-chart').classList.add("hidden");
+    document.getElementById('gender-analysis-table').classList.remove('hidden');
+    document.getElementById('gender-analysis-chart').classList.add('hidden');
   }
   tableGender = !tableGender;
 }
 
-function drawChart(result){
-	result.json().then(function(data){
-		let item = [];
-		let itemNum = [];
-		let ageInterval = data['interval'];
-		let femaleNum = [];
-		let maleNum = [];
-		let ageIntervalNum = [];
-		let genderNum = [0,0];
-	
-		for (let key in data['itemAnalysis']){
-			item.push(key);
-			itemNum.push(data['itemAnalysis'][key]['total']);
-		}
-		for (let key in data['genderAnalysis']){
-			femaleNum.push(data['genderAnalysis'][key]['female']);
-			maleNum.push(data['genderAnalysis'][key]['male']);
-			ageIntervalNum.push(data['genderAnalysis'][key]['total']);
-		}
-		
-		for(let index in ageInterval){
-			genderNum[0] += femaleNum[index];
-			genderNum[1] += maleNum[index];
-		}
-		
-		drawItem(item,itemNum);
-		drawGender(ageInterval,femaleNum,maleNum,ageIntervalNum,genderNum);
-	});
-}
-
-function drawItem(item,itemNum) {
+function drawItem(item, itemNum) {
   const barChart = document.getElementById('item-bar-chart');
   const pieChart = document.getElementById('item-pie-chart');
-  let myBarChart = new Chart(barChart, {
+
+  // eslint-disable-next-line no-unused-vars
+  const myItemBar = new Chart(barChart, {
     type: 'bar',
     data: {
       labels: item,
       datasets: [{
-        label: '',
+        label: '各餐點銷售數量',
         data: itemNum,
         backgroundColor: [
-          "#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c",
-          "#9287e7", "#27A1EA", "#4EBECD", "#9CDC82", "#FF9F69",
-          "#E9668E", "#747BE1", "#39B3EA", "#40CEC7", "#D4EC59",
-          "#FA816D", "#D660A8", "#6370DE", "#35C5EA", "#63D5B2",
-          "#FFDA43", "#FB6E6C", "#B55CBD", "#668ED6", "#9FCDFD",
-		  "#FF79BC", "#FF9797", "#CA8EFF", "#019858", "#C48888",
-		  "#0080FF",
-        ]
-      }]
-    }
+          '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
+          '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+          '#E9668E', '#747BE1', '#39B3EA', '#40CEC7', '#D4EC59',
+          '#FA816D', '#D660A8', '#6370DE', '#35C5EA', '#63D5B2',
+          '#FFDA43', '#FB6E6C', '#B55CBD', '#668ED6', '#9FCDFD',
+          '#FF79BC', '#FF9797', '#CA8EFF', '#019858', '#C48888',
+          '#0080FF',
+        ],
+      }],
+    },
   });
-  let myPieChart = new Chart(pieChart, {
+  // eslint-disable-next-line no-unused-vars
+  const myItemPie = new Chart(pieChart, {
     type: 'pie',
     data: {
       labels: item,
@@ -83,27 +57,33 @@ function drawItem(item,itemNum) {
         label: 'Groups',
         data: itemNum,
         backgroundColor: [
-          "#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c",
-          "#9287e7", "#27A1EA", "#4EBECD", "#9CDC82", "#FF9F69",
-          "#E9668E", "#747BE1", "#39B3EA", "#40CEC7", "#D4EC59",
-          "#FA816D", "#D660A8", "#6370DE", "#35C5EA", "#63D5B2",
-          "#FFDA43", "#FB6E6C", "#B55CBD", "#668ED6", "#9FCDFD",
-		  "#FF79BC", "#FF9797", "#CA8EFF", "#019858", "#C48888",
-		  "#0080FF",
-        ]
-      }]
-    }
+          '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
+          '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+          '#E9668E', '#747BE1', '#39B3EA', '#40CEC7', '#D4EC59',
+          '#FA816D', '#D660A8', '#6370DE', '#35C5EA', '#63D5B2',
+          '#FFDA43', '#FB6E6C', '#B55CBD', '#668ED6', '#9FCDFD',
+          '#FF79BC', '#FF9797', '#CA8EFF', '#019858', '#C48888',
+          '#0080FF',
+        ],
+      }],
+    },
+    options: {
+      title: {
+        display: true,
+        text: '各餐點銷售數量',
+      },
+    },
   });
 }
 
-function drawGender(ageInterval,femaleNum,maleNum,ageIntervalNum,genderNum) {
+function drawGender(ageInterval, femaleNum, maleNum, ageIntervalNum, genderNum) {
   const maleChart = document.getElementById('male-pie-chart');
   const femaleChart = document.getElementById('female-pie-chart');
   const genderChart = document.getElementById('gender-pie-chart');
   const ageChart = document.getElementById('age-pie-chart');
-  femaleNum = [100,23,34,52,12,32,41];
-  maleNum = [12,23,43,12,34,23,12];
-  let myFemaleChart = new Chart(femaleChart, {
+
+  // eslint-disable-next-line no-unused-vars
+  const myFemaleChart = new Chart(femaleChart, {
     type: 'pie',
     data: {
       labels: ageInterval,
@@ -111,16 +91,23 @@ function drawGender(ageInterval,femaleNum,maleNum,ageIntervalNum,genderNum) {
         label: 'Groups',
         data: femaleNum,
         backgroundColor: [
-          "#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c",
-          "#9287e7", "#27A1EA", "#4EBECD", "#9CDC82", "#FF9F69",
-          "#E9668E", "#747BE1", "#39B3EA", "#40CEC7", "#D4EC59",
-          "#FA816D", "#D660A8", "#6370DE", "#35C5EA", "#63D5B2",
-          "#FFDA43", "#FB6E6C", "#B55CBD", "#668ED6", "#9FCDFD"
-        ]
-      }]
-    }
+          '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
+          '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+          '#E9668E', '#747BE1', '#39B3EA', '#40CEC7', '#D4EC59',
+          '#FA816D', '#D660A8', '#6370DE', '#35C5EA', '#63D5B2',
+          '#FFDA43', '#FB6E6C', '#B55CBD', '#668ED6', '#9FCDFD',
+        ],
+      }],
+    },
+    options: {
+      title: {
+        display: true,
+        text: '女性各年齡銷售數量',
+      },
+    },
   });
-  let myMaleChart= new Chart(maleChart, {
+  // eslint-disable-next-line no-unused-vars
+  const myMaleChart = new Chart(maleChart, {
     type: 'pie',
     data: {
       labels: ageInterval,
@@ -128,30 +115,44 @@ function drawGender(ageInterval,femaleNum,maleNum,ageIntervalNum,genderNum) {
         label: 'Groups',
         data: maleNum,
         backgroundColor: [
-          "#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c",
-          "#9287e7", "#27A1EA", "#4EBECD", "#9CDC82", "#FF9F69",
-          "#E9668E", "#747BE1", "#39B3EA", "#40CEC7", "#D4EC59",
-          "#FA816D", "#D660A8", "#6370DE", "#35C5EA", "#63D5B2",
-          "#FFDA43", "#FB6E6C", "#B55CBD", "#668ED6", "#9FCDFD"
-        ]
-      }]
-    }
+          '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
+          '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+          '#E9668E', '#747BE1', '#39B3EA', '#40CEC7', '#D4EC59',
+          '#FA816D', '#D660A8', '#6370DE', '#35C5EA', '#63D5B2',
+          '#FFDA43', '#FB6E6C', '#B55CBD', '#668ED6', '#9FCDFD',
+        ],
+      }],
+    },
+    options: {
+      title: {
+        display: true,
+        text: '男性各年齡銷售數量',
+      },
+    },
   });
-  let myGenderChart = new Chart(genderChart, {  //男女比
+  // eslint-disable-next-line no-unused-vars
+  const myGenderChart = new Chart(genderChart, { // 男女比
     type: 'pie',
     data: {
-      labels: ["女","男"],
+      labels: ['女', '男'],
       datasets: [{
         label: 'Groups',
         data: genderNum,
         backgroundColor: [
-          "#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c",
-          "#9287e7", "#27A1EA", "#4EBECD", "#9CDC82", "#FF9F69",
-        ]
-      }]
-    }
+          '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
+          '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+        ],
+      }],
+    },
+    options: {
+      title: {
+        display: true,
+        text: '男女各銷售數量',
+      },
+    },
   });
-  let myAgeChart = new Chart(ageChart, {  //年齡比
+  // eslint-disable-next-line no-unused-vars
+  const myAgeChart = new Chart(ageChart, { // 年齡比
     type: 'pie',
     data: {
       labels: ageInterval,
@@ -159,10 +160,49 @@ function drawGender(ageInterval,femaleNum,maleNum,ageIntervalNum,genderNum) {
         label: 'Groups',
         data: ageIntervalNum,
         backgroundColor: [
-          "#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c",
-          "#9287e7", "#27A1EA", "#4EBECD", "#9CDC82", "#FF9F69",
-        ]
-      }]
-    }
+          '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
+          '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+        ],
+      }],
+    },
+    options: {
+      title: {
+        display: true,
+        text: '各年齡層銷售數量',
+      },
+    },
   });
 }
+
+// eslint-disable-next-line no-unused-vars
+async function drawChart(res) {
+  const data = await res.json();
+  const itemData = data.itemAnalysis;
+  const item = Object.keys(itemData);
+  const ageInterval = data.interval;
+  const itemNum = [];
+  const femaleNum = [];
+  const maleNum = [];
+  const ageIntervalNum = [];
+  const genderNum = [0, 0];
+
+  Object.values(data.itemAnalysis).forEach((element) => {
+    itemNum.push(element.total);
+  });
+  Object.values(data.genderAnalysis).forEach((element) => {
+    femaleNum.push(element.female);
+    genderNum[0] += element.female;
+    maleNum.push(element.male);
+    genderNum[1] += element.male;
+    ageIntervalNum.push(element.total);
+  });
+  drawItem(item, itemNum);
+  drawGender(ageInterval, femaleNum, maleNum, ageIntervalNum, genderNum);
+}
+
+function initChart() {
+  document.getElementById('item-analysis-btn').addEventListener('click', toggleItem);
+  document.getElementById('gender-analysis-btn').addEventListener('click', toggleGender);
+}
+
+window.addEventListener('load', initChart);
