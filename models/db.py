@@ -2,7 +2,6 @@ from config import URL
 
 from pymongo import MongoClient
 
-print("db.py has establish db")
 DB = MongoClient(URL)["loveat2"]
 
 BUSINESS_COLLECTION = DB["businessTime"]

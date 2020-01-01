@@ -60,11 +60,13 @@ async function register() {
 }
 function authInit() {
   // add event listener
-  document.getElementById('login').addEventListener('click', login);
-  document.getElementById('register').addEventListener('click', register);
-  // reload after closing register-success-modal, login-frozen-modal
-  $('#register-success-modal, #login-frozen-modal').on('hide.bs.modal', () => {
-    window.location.reload();
+  document.getElementById('login-form').addEventListener('submit', () => {
+    login();
+    return false;
+  });
+  document.getElementById('register-form').addEventListener('submit', () => {
+    register();
+    return false;
   });
   // validate password when password or confirm password change
   document.getElementById('register-password').addEventListener('keyup', validatePassword);
