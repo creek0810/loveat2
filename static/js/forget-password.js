@@ -34,18 +34,12 @@ async function sendResetRequest() {
   }
 }
 
-
-function clickOnEnter(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById('forget-password-btn').click();
-  }
-}
-
 function init() {
   // add event listener
-  document.getElementById('forget-password-btn').addEventListener('click', sendResetRequest);
-  document.getElementById('user-name').addEventListener('keyup', clickOnEnter);
+  document.getElementById('forget-password-form').addEventListener('submit', () => {
+    sendResetRequest();
+    return false;
+  });
 }
 
 window.addEventListener('load', init);

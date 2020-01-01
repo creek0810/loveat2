@@ -43,21 +43,15 @@ async function resetPassword() {
   }
 }
 
-
-function clickOnEnter(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById('reset-password-btn').click();
-  }
-}
-
 function init() {
   // add event listener
-  document.getElementById('reset-password-btn').addEventListener('click', resetPassword);
+  document.getElementById('reset-password-form').addEventListener('submit', () => {
+    resetPassword();
+    return false;
+  });
   // validate password when password or confirm password change
   document.getElementById('new-password').addEventListener('keyup', validateNewPassword);
   document.getElementById('confirm-new-password').addEventListener('keyup', validateNewPassword);
-  document.getElementById('confirm-new-password').addEventListener('keyup', clickOnEnter);
 }
 
 window.addEventListener('load', init);
