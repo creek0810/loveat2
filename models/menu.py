@@ -47,15 +47,40 @@ def get_all():
             ]
         )
     )
+
+    TOP_RANK = 3
+    top_item_result = list(
+        db.ITEM_COLLECTION.find().sort([("sell", -1)]).limit(TOP_RANK)
+    )
+    top_item_list = []
+    for item in top_item_result:
+        top_item_list.append(str(item["_id"]))
+
     for item in item_result:
-        for content in item["content"]:
+        for content in list(item["content"]):
             content["_id"] = str(content["_id"])
+            if content["_id"] in top_item_list:
+                content["top"] = True
+            else:
+                content["top"] = False
         item["type"] = item.pop("name")
+
+    top_combo_result = list(
+        db.COMBO_COLLECTION.find().sort([("sell", -1)]).limit(TOP_RANK)
+    )
+    top_combo_list = []
+    for combo in top_combo_result:
+        top_combo_list.append(str(combo["_id"]))
 
     for combo in combo_result:
         for content in combo["content"]:
             content["_id"] = str(content["_id"])
+            if content["_id"] in top_combo_list:
+                content["top"] = True
+            else:
+                content["top"] = False
         combo["type"] = combo.pop("name")
+
     return item_result + combo_result
 
 
