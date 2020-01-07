@@ -1,78 +1,92 @@
 {% extends "layout.html" %}
 {% set active_page = "cart" %}
 {% set url = "customer" %}
-
 {% block header %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
-    <script src="{{ url_for('static', filename='js/loveat2-cart.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='js/lib/cart.js')}}" type="text/javascript"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+	<script src="{{ url_for('static', filename='js/loveat2-cart.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='js/lib/cart.js')}}" type="text/javascript"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
+	<script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
 {% endblock %}
 
-
 {% block content %}
-    <div class="cart-container">
-        <div class="item-container">
-            <table class="table" id="cart-table">
-                <thead class="thead-dark">
-                    <tr id="cart-title">
-                        <th scope="col">名稱</th>
-                        <th scope="col">數量</th>
-                        <th scope="col">價格</th>
-                        <th scope="col">備註</th>
-                        <th scope="col">總共</th>
-                        <th scope="col">其他</th>
-                    </tr>
-                    <tr id="replace-title">
-                        <th scope="col">品項</th>
-                    </tr>
-                    </thead>
-                <tbody id="item-table">
-                    <!-- input order from localstorage-->
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="op-container">
-            <div class="form-inline">
-                預定取餐時間 :<input type="datetime-local" id="order-take-time" class="form-control">
-            </div>
-            <div class="price-container">
-                價格: <span id="total">0</span>元
-            </div>
-        </div>
-        <div class="btn-container">
-            <button id="clear-order" class="btn btn-primary">Clear</button>
-            &nbsp;&nbsp;
-            <button id="send-order" class="btn btn-primary" type="button">Send</button>
-        </div>
-    </div>
+	<div class="cart-container">
+		<div class="item-container">
+			<table class="table" id="cart-table">
+				<thead class="thead-dark">
+					<tr id="cart-title">
+						<th scope="col">名稱</th>
+						<th scope="col">數量</th>
+						<th scope="col">價格</th>
+						<th scope="col">備註</th>
+						<th scope="col">總共</th>
+						<th scope="col">其他</th>
+					</tr>
+					<tr id="replace-title">
+						<th scope="col">品項</th>
+					</tr>
+				</thead>
+				<tbody id="item-table">
+					<!-- input order from localstorage-->
+				</tbody>
+			</table>
+		</div>
+		<div class="op-container">
+			<div class="form-inline">
+				預定取餐時間 :
+				<div class="input-group date form_datetime col-md-5" data-date="" data-date-format="yyyy MM dd HH:ii" data-link-field="order-take-time">
+					<input id="show-pick-time" class="form-control" type="text" value="" readonly>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="order-take-time" value="" /><br />
+			</div>
+			<div class="price-container">
+				價格: <span id="total">0</span>元
+			</div>
+		</div>
+		<div class="btn-container">
+			<button id="clear-order" class="btn btn-primary">Clear</button> &nbsp;&nbsp;
+			<button id="send-order" class="btn btn-primary" type="button">Send</button>
+		</div>
+	</div>
 
-    <div class="modal" id="order-send-hint-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="hint-title">Hint</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="hint-content">
-                    <!-- hint content -->
-                </p>
-                <p id="bussiness_data">
-                    可點餐時段<br>
-                    {% for time in bussiness_data %}
-                        {{time}}&nbsp&nbsp{{bussiness_data[time]}}<br>
-                    {% endfor %}
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="close-modal" class="btn btn-secondary" href="" data-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
+	<div class="modal" id="order-send-hint-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="hint-title">Hint</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p id="hint-content">
+						<!-- hint content -->
+					</p>
+					<p id="bussiness_data">
+						可點餐時段<br>
+						{% for time in bussiness_data %}
+							{{time}}&nbsp&nbsp{{bussiness_data[time]}}<br>
+						{% endfor %}
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="close-modal" class="btn btn-secondary" href="" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('.form_datetime').datetimepicker({
+			weekStart: 1,
+			todayBtn: 1,
+			autoclose: 1,
+			todayHighlight: 1,
+			forceParse: 0,
+			showMeridian: 1,
+			pickerPosition: "top-right",
+		});
+	</script>
 
 {% endblock %}

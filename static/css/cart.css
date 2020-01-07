@@ -54,6 +54,11 @@ th {
     display: none;
 }
 
+#show-pick-time {
+    width: 15rem;
+    float: left;
+}
+
 @media (max-width: 575px) {
     .op-container {
         display: inline;
@@ -83,24 +88,23 @@ th {
         justify-content: space-around;
         flex-direction: column;
     }
-    
-    tbody > tr {
+
+    #item-table > tr {
         display: inline-flex;
         flex-direction: column;
         border: 5px;
         border-style: solid;
         border-color: rgba(0, 127, 255, 0.5);
         margin: 1px;
-        
     }
 
     .delete-item {
         float: right;
     }
 
-    tbody td:before{ 
+    tbody td:before{
         display: inline;
         font-weight: bold;
         content: attr(data-th);
-    }    
+    }
 }
