@@ -7,6 +7,7 @@ from lib.custom_except import duplicateError
 
 from models import db
 
+
 def combine_top(category, menu_list, top_list):
     for product in menu_list:
         for content in list(product["content"]):
@@ -18,24 +19,30 @@ def combine_top(category, menu_list, top_list):
         product["type"] = product.pop("name")
     return menu_list
 
+
 def get_top_sell(category):
     TOP_RANK = 3
     top_list = []
 
     if category == "item":
         result = list(
-            db.ITEM_COLLECTION.find({}, {"_id":1}).sort([("sell", -1)]).limit(TOP_RANK)
+            db.ITEM_COLLECTION.find({}, {"_id": 1})
+            .sort([("sell", -1)])
+            .limit(TOP_RANK)
         )
     elif category == "combo":
         result = list(
-            db.COMBO_COLLECTION.find({}, {"_id":1}).sort([("sell", -1)]).limit(TOP_RANK)
+            db.COMBO_COLLECTION.find({}, {"_id": 1})
+            .sort([("sell", -1)])
+            .limit(TOP_RANK)
         )
 
     for item in result:
         top_list.append(str(item["_id"]))
 
     return top_list
-    
+
+
 def get_all():
     item_result = list(
         db.TYPE_COLLECTION.aggregate(

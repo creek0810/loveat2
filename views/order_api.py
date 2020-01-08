@@ -73,7 +73,7 @@ def update_order_state():
     except KeyError:
         cancel_content = ""
 
-    if data['state'] == "end":
+    if data["state"] == "end":
         order.update_food_amount(data)
 
     message = {
