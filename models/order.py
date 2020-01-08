@@ -322,17 +322,11 @@ def update_food_amount(data):
         {"_id": ObjectId(data["id"])}, {"content": 1, "_id": 0}
     )
     for meal in result["content"]:
-        if meal["type"] == "item":
+        if meal["category"] == "item":
             db.ITEM_COLLECTION.update(
-                {"name": meal["name"]}, {"$setOnInsert": {"sell": 0}}
+                {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
             )
-        db.ITEM_COLLECTION.update(
-            {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
-        )
-        if meal["type"] == "combo":
+        if meal["category"] == "combo":
             db.COMBO_COLLECTION.update(
-                {"name": meal["name"]}, {"$setOnInsert": {"sell": 0}}
+                {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
             )
-        db.COMBO_COLLECTION.update(
-            {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
-        )
