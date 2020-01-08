@@ -315,3 +315,18 @@ def get_unknown_order():
     )
     result = db.ORDER_COLLECTION.aggregate(pipeline)
     return result
+
+
+def update_food_amount(data):
+    result = db.ORDER_COLLECTION.find_one(
+        {"_id": ObjectId(data["id"])}, {"content": 1, "_id": 0}
+    )
+    for meal in result["content"]:
+        if meal["category"] == "item":
+            db.ITEM_COLLECTION.update(
+                {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
+            )
+        if meal["category"] == "combo":
+            db.COMBO_COLLECTION.update(
+                {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
+            )

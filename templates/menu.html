@@ -24,7 +24,11 @@
                     <div class="col-lg-9 col-md-5 col-12">
                         <div class="row h-100">
                             <div class="col-lg-7">
-                                名稱: {{item["name"]}}<br>
+                                名稱: {{item["name"]}}
+                                {% if item["top"] == true %}
+                                    <img src="/static/img/hot.gif" height=35 width = 35 alt="熱門商品"></img>
+                                {%endif%}
+                                <br>
                                 價格: {{item["price"]}} <br>
                                 說明: {{item["description"]}} <br>
                                 {% if type["category"] == "combo" %}

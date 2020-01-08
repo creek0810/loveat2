@@ -8,6 +8,41 @@ from lib.custom_except import duplicateError
 from models import db
 
 
+def combine_top(category, menu_list, top_list):
+    for product in menu_list:
+        for content in list(product["content"]):
+            content["_id"] = str(content["_id"])
+            if content["_id"] in top_list:
+                content["top"] = True
+            else:
+                content["top"] = False
+        product["type"] = product.pop("name")
+    return menu_list
+
+
+def get_top_sell(category):
+    TOP_RANK = 3
+    top_list = []
+
+    if category == "item":
+        result = list(
+            db.ITEM_COLLECTION.find({}, {"_id": 1})
+            .sort([("sell", -1)])
+            .limit(TOP_RANK)
+        )
+    elif category == "combo":
+        result = list(
+            db.COMBO_COLLECTION.find({}, {"_id": 1})
+            .sort([("sell", -1)])
+            .limit(TOP_RANK)
+        )
+
+    for item in result:
+        top_list.append(str(item["_id"]))
+
+    return top_list
+
+
 def get_all():
     item_result = list(
         db.TYPE_COLLECTION.aggregate(
@@ -47,16 +82,13 @@ def get_all():
             ]
         )
     )
-    for item in item_result:
-        for content in item["content"]:
-            content["_id"] = str(content["_id"])
-        item["type"] = item.pop("name")
+    top_item = get_top_sell("item")
+    top_combo = get_top_sell("combo")
 
-    for combo in combo_result:
-        for content in combo["content"]:
-            content["_id"] = str(content["_id"])
-        combo["type"] = combo.pop("name")
-    return item_result + combo_result
+    item = combine_top("item", item_result, top_item)
+    combo = combine_top("combo", combo_result, top_combo)
+
+    return item + combo
 
 
 def get_item_by_id(data, detail=False):
@@ -136,6 +168,7 @@ def add_item(data, pic):
                 "picture": pic_id,
                 "price": int(data.get("price")),
                 "description": data.get("description"),
+                "sell": 0,
             }
         )
         db.IMAGE_COLLECTION.insert_one({"uuid": pic_id, "picture": pic})
@@ -163,6 +196,7 @@ def add_combo(data, pic):
                 "price": int(data.get("price")),
                 "description": data.get("description"),
                 "content": content,
+                "sell": 0,
             }
         )
         db.IMAGE_COLLECTION.insert_one({"uuid": pic_id, "picture": pic})

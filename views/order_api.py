@@ -72,6 +72,10 @@ def update_order_state():
         cancel_content = data["content"]
     except KeyError:
         cancel_content = ""
+
+    if data["state"] == "end":
+        order.update_food_amount(data)
+
     message = {
         "doing": {"title": "訂單已接受", "content": "老闆已接受您的訂單"},
         "cancel": {
