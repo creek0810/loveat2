@@ -21,7 +21,7 @@ class TestMenu(object):
                     "name": "鐵板麵套餐",
                     "picture": "06dcc1d4-90aa-4ba9-8758-6de813bc5fa4",
                     "price": 70,
-                    'top': True,
+                    "top": True,
                 },
                 {
                     "_id": "5dda567d09d84aa89699121a",
@@ -33,7 +33,7 @@ class TestMenu(object):
                     "name": "鐵板麵套餐(無熱狗)",
                     "picture": "a9e7793c-02c4-4697-a14f-0f4c8a6d175a",
                     "price": 70,
-                    'top': True,
+                    "top": True,
                 },
             ],
             "type": "鐵板麵套餐",
@@ -66,7 +66,7 @@ class TestMenu(object):
         rv = client.post(
             url,
             data=json.dumps(["5dd67f098f0f6afb3ebc1b69"]),
-            content_type = "application/json",
+            content_type="application/json",
         )
         assert rv.status_code == 200
         assert json.loads(rv.data) == [

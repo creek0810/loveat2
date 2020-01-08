@@ -259,7 +259,7 @@ class TestCombo(object):
                 },
             ],
             "picture": tmp_combo["picture"],
-            "sell":0,
+            "sell": 0,
         }
 
     def test_add_duplicate(self, client, admin):

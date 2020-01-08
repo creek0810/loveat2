@@ -20,8 +20,6 @@ flask-login = "*"
 pymongo = "*"
 python-dateutil = "*"
 flask-cors = "*"
-mongomock = "*"
-freezegun = "*"
 
 [requires]
 python_version = "3.7"
