@@ -175,6 +175,7 @@ class TestItem(object):
             "picture": tmp_item["picture"],
             "price": 20,
             "description": "新品",
+            "sell": 0,
         }
 
     def test_add_duplicate(self, client, admin):

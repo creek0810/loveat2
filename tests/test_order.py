@@ -92,11 +92,9 @@ class TestOrder(object):
         url = URL_PREFIX + "/update"
         rv = client.post(
             url,
-            data=json.dumps({
-                "id": self.update_order_id,
-                "state": "cancel",
-                "content": ""
-            }),
+            data=json.dumps(
+                {"id": self.update_order_id, "state": "cancel", "content": ""}
+            ),
             content_type="application/json",
         )
         assert rv.status_code == 403
@@ -111,11 +109,9 @@ class TestOrder(object):
         url = URL_PREFIX + "/update"
         rv = client.post(
             url,
-            data=json.dumps({
-                "id": self.update_order_id,
-                "state": "cancel",
-                "content": ""
-            }),
+            data=json.dumps(
+                {"id": self.update_order_id, "state": "cancel", "content": ""}
+            ),
             content_type="application/json",
         )
         assert rv.status_code == 403
@@ -130,11 +126,13 @@ class TestOrder(object):
         url = URL_PREFIX + "/update"
         rv = client.post(
             url,
-            data=json.dumps({
-                "id": self.update_nonexist_order_id,
-                "state": "cancel",
-                "content": ""
-            }),
+            data=json.dumps(
+                {
+                    "id": self.update_nonexist_order_id,
+                    "state": "cancel",
+                    "content": "",
+                }
+            ),
             content_type="application/json",
         )
         assert rv.status_code == 404
