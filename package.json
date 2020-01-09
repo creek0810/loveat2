@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/eslint .",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "format": "./node_modules/.bin/prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "eslint-plugin-import": "^2.18.2",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
     "semantic-release": "^15.13.31"
   },
   "release": {
@@ -45,6 +47,7 @@
   },
   "lint-staged": {
     "*.js": [
+      "./node_modules/.bin/prettier --write",
       "./node_modules/.bin/eslint --fix",
       "git add"
     ],

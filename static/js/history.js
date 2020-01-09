@@ -5,9 +5,18 @@ const APIHistory = {
 };
 
 const month = new Map([
-  ['Jan', '1'], ['Feb', '2'], ['Mar', '3'], ['Apr', '4'],
-  ['May', '5'], ['Jun', '6'], ['Jul', '7'], ['Aug', '8'],
-  ['Sep', '9'], ['Oct', '10'], ['Nov', '11'], ['Dec', '12'],
+  ['Jan', '1'],
+  ['Feb', '2'],
+  ['Mar', '3'],
+  ['Apr', '4'],
+  ['May', '5'],
+  ['Jun', '6'],
+  ['Jul', '7'],
+  ['Aug', '8'],
+  ['Sep', '9'],
+  ['Oct', '10'],
+  ['Nov', '11'],
+  ['Dec', '12'],
 ]);
 
 let result = '';
@@ -46,7 +55,9 @@ function updateHistoryUI() {
 
   result.forEach((element) => {
     let dateTime = element.createdAt.split(' ');
-    dateTime = `${dateTime[3]}/${month.get(dateTime[2])}/${dateTime[1]}<br>${dateTime[4].split(':')[0]}:${dateTime[4].split(':')[1]}`;
+    dateTime = `${dateTime[3]}/${month.get(dateTime[2])}/${dateTime[1]}<br>${
+      dateTime[4].split(':')[0]
+    }:${dateTime[4].split(':')[1]}`;
     tmpBody += `<tr><td>${element.orderID}</td><td>${dateTime}</td><td>`;
     element.content.forEach((ele) => {
       tmpBody += `${ele.quantity} * ${ele.name}<br>`;
@@ -121,22 +132,27 @@ function updateContactUI() {
   document.getElementById('contact-tbody').innerHTML = tmpBody;
 }
 
-
 async function getData() {
   const start = document.getElementById('start-time').value;
   const end = document.getElementById('end-time').value;
 
-  const rawHistoryResult = await FetchData.get(`${APIHistory.rawHistory}start=${start}&end=${end}`);
+  const rawHistoryResult = await FetchData.get(
+    `${APIHistory.rawHistory}start=${start}&end=${end}`,
+  );
   result = await rawHistoryResult.json();
-  if (rawHistoryResult.status === 403) { // show wrong msg
+  if (rawHistoryResult.status === 403) {
+    // show wrong msg
     console.log('raw_history權限錯誤');
   } else {
     updateHistoryUI();
   }
 
-  const analysisHistoryResult = await FetchData.get(`${APIHistory.analysisHistory}start=${start}&end=${end}`);
+  const analysisHistoryResult = await FetchData.get(
+    `${APIHistory.analysisHistory}start=${start}&end=${end}`,
+  );
   result = await analysisHistoryResult.json();
-  if (analysisHistoryResult.status === 403) { // show wrong msg
+  if (analysisHistoryResult.status === 403) {
+    // show wrong msg
     console.log('analysis權限錯誤');
   } else {
     updateProfileUI();
@@ -151,11 +167,21 @@ function initHistory() {
   // initial page
   getData();
   // add event listener
-  document.getElementById('history-time-send').addEventListener('click', getData);
-  document.getElementById('gender-check').addEventListener('change', updateContactUI);
-  document.getElementById('age-check').addEventListener('change', updateContactUI);
-  document.getElementById('item-analysis-btn').addEventListener('click', toggleItem);
-  document.getElementById('gender-analysis-btn').addEventListener('click', toggleGender);
+  document
+    .getElementById('history-time-send')
+    .addEventListener('click', getData);
+  document
+    .getElementById('gender-check')
+    .addEventListener('change', updateContactUI);
+  document
+    .getElementById('age-check')
+    .addEventListener('change', updateContactUI);
+  document
+    .getElementById('item-analysis-btn')
+    .addEventListener('click', toggleItem);
+  document
+    .getElementById('gender-analysis-btn')
+    .addEventListener('click', toggleGender);
 }
 
 window.addEventListener('load', initHistory);

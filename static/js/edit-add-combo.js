@@ -30,7 +30,9 @@ function display() {
 }
 
 function delayURL(url, time) {
-  setTimeout(() => { window.location.href = `${url}`; }, time);
+  setTimeout(() => {
+    window.location.href = `${url}`;
+  }, time);
 }
 
 function clearContent() {
@@ -76,7 +78,6 @@ function checkStatus(status, actionNum) {
 }
 
 // display on board instantly
-
 
 async function itemBytypeInit() {
   document.getElementById('item').options.length = 0;
@@ -172,7 +173,6 @@ async function upload() {
       const myForm = document.getElementById('combo-form');
       const formData = new FormData(myForm);
 
-
       formData.append('type', selection.options[index].id.substring(5));
       formData.append('price', document.getElementById('price').value);
       formData.append('content', content);
@@ -180,30 +180,41 @@ async function upload() {
         const result = await FetchData.postForm(menuEditAPI.newCombo, formData);
         checkStatus(result.status, ADD);
       } else {
-        formData.append('id', document.getElementsByClassName('combo-id')[0].id.substring(3));
-        const result = await FetchData.postForm(menuEditAPI.updateCombo, formData);
+        formData.append(
+          'id',
+          document.getElementsByClassName('combo-id')[0].id.substring(3),
+        );
+        const result = await FetchData.postForm(
+          menuEditAPI.updateCombo,
+          formData,
+        );
         checkStatus(result.status, UPDATE);
       }
     }
   }
 }
 
-
 // let picture can show instantly
 function readURL(input) {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = function loadPicture(e) {
-      document.getElementById('picture-show').setAttribute('src', e.target.result);
+      document
+        .getElementById('picture-show')
+        .setAttribute('src', e.target.result);
     };
     reader.readAsDataURL(input.files[0]);
   }
 }
 
 function displayInitType() {
-  const typeId = document.getElementsByClassName('combo-type')[0].id.substring(5);
+  const typeId = document
+    .getElementsByClassName('combo-type')[0]
+    .id.substring(5);
   const typeSection = document.getElementById('type-list');
-  const result = [...typeSection.options].find((Eachtype) => Eachtype.id.substring(5) === typeId);
+  const result = [...typeSection.options].find(
+    (Eachtype) => Eachtype.id.substring(5) === typeId,
+  );
   result.selected = true;
 }
 
@@ -237,8 +248,14 @@ function init() {
   document.getElementById('price').addEventListener('keyup', display);
   document.getElementById('price').addEventListener('change', display);
   document.getElementById('description').addEventListener('keyup', display);
-  document.getElementById('picture').addEventListener('change', function read() { readURL(this); });
-  document.getElementById('item-type').addEventListener('change', itemBytypeInit);
+  document
+    .getElementById('picture')
+    .addEventListener('change', function read() {
+      readURL(this);
+    });
+  document
+    .getElementById('item-type')
+    .addEventListener('change', itemBytypeInit);
   display();
 }
 

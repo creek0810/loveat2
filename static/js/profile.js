@@ -19,7 +19,7 @@ function validatePassword() {
     }
   });
 
-  if ((newPassword.value).length < 7) {
+  if (newPassword.value.length < 7) {
     newPassword.setCustomValidity('密碼需設長度大於等於8個字母長度');
   } else if (newPassword.value !== comfirmNewPassword.value) {
     comfirmNewPassword.setCustomValidity('無法和密碼匹配');
@@ -46,7 +46,8 @@ async function updatePassword() {
       } else if (result.status === 200) {
         $('#update-password-modal').modal('hide');
         $('#update-success-modal').modal('show');
-        PASSWORD.forEach((element) => { // clear password field
+        PASSWORD.forEach((element) => {
+          // clear password field
           document.getElementById(element).value = '';
         });
       }
@@ -54,14 +55,15 @@ async function updatePassword() {
   }
 }
 
-
 /* ----get and show the photo on the profile---- */
 function readURL(input) {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
 
     reader.onload = function loadPicture(e) {
-      document.getElementById('picture-show').setAttribute('src', e.target.result);
+      document
+        .getElementById('picture-show')
+        .setAttribute('src', e.target.result);
     };
 
     reader.readAsDataURL(input.files[0]);
@@ -93,8 +95,10 @@ function validateUserInfo() {
 /* ----update the user info---- */
 async function updateUserInfo() {
   validateUserInfo();
-  if (document.forms['user-info-form'].reportValidity()
-     && document.forms['user-propic-form'].reportValidity()) {
+  if (
+    document.forms['user-info-form'].reportValidity()
+    && document.forms['user-propic-form'].reportValidity()
+  ) {
     const formData = new FormData();
     const gender = document.getElementById('gender');
     formData.append('age', document.getElementById('age').value);
@@ -113,15 +117,26 @@ async function updateUserInfo() {
   }
 }
 
-
 function init() {
   /* ----listener for change photo---- */
-  document.getElementById('changePhoto').addEventListener('change', function read() { readURL(this); });
+  document
+    .getElementById('changePhoto')
+    .addEventListener('change', function read() {
+      readURL(this);
+    });
   /* ----listener for password update---- */
-  document.getElementById('change-password').addEventListener('click', (event) => { event.preventDefault(); });
-  document.getElementById('updatePassword').addEventListener('click', updatePassword);
+  document
+    .getElementById('change-password')
+    .addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  document
+    .getElementById('updatePassword')
+    .addEventListener('click', updatePassword);
   /* ----listener for user info update---- */
-  document.getElementById('updateUserInfo').addEventListener('click', updateUserInfo);
+  document
+    .getElementById('updateUserInfo')
+    .addEventListener('click', updateUserInfo);
 }
 
 window.addEventListener('load', init);

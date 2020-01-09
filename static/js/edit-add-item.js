@@ -28,7 +28,9 @@ function clearContent() {
 }
 
 function delayURL(url, time) {
-  setTimeout(() => { window.location.href = `${url}`; }, time);
+  setTimeout(() => {
+    window.location.href = `${url}`;
+  }, time);
 }
 
 const successfulMsg = ['新增', '修改'];
@@ -68,13 +70,15 @@ async function upload() {
       const result = await FetchData.postForm(newItemAPI, formData);
       checkStatus(result.status, ADD);
     } else {
-      formData.append('id', document.getElementsByClassName('item-id')[0].id.substring(3));
+      formData.append(
+        'id',
+        document.getElementsByClassName('item-id')[0].id.substring(3),
+      );
       const result = await FetchData.postForm(updateItemAPI, formData);
       checkStatus(result.status, UPDATE);
     }
   }
 }
-
 
 // let picture can show instantly
 function readURL(input) {
@@ -82,7 +86,9 @@ function readURL(input) {
     const reader = new FileReader();
 
     reader.onload = function loadPicture(e) {
-      document.getElementById('picture-show').setAttribute('src', e.target.result);
+      document
+        .getElementById('picture-show')
+        .setAttribute('src', e.target.result);
     };
 
     reader.readAsDataURL(input.files[0]);
@@ -90,9 +96,13 @@ function readURL(input) {
 }
 
 function displayInitType() {
-  const typeId = document.getElementsByClassName('item-type')[0].id.substring(5);
+  const typeId = document
+    .getElementsByClassName('item-type')[0]
+    .id.substring(5);
   const typeSection = document.getElementById('type-list');
-  const result = [...typeSection.options].find((Eachtype) => Eachtype.id.substring(5) === typeId);
+  const result = [...typeSection.options].find(
+    (Eachtype) => Eachtype.id.substring(5) === typeId,
+  );
   result.selected = true;
 }
 
@@ -107,7 +117,11 @@ function init() {
   document.getElementById('price').addEventListener('change', display);
   document.getElementById('price').addEventListener('keyup', display);
   document.getElementById('description').addEventListener('keyup', display);
-  document.getElementById('picture').addEventListener('change', function read() { readURL(this); });
+  document
+    .getElementById('picture')
+    .addEventListener('change', function read() {
+      readURL(this);
+    });
   display();
 }
 

@@ -23,22 +23,27 @@ messaging.setBackgroundMessageHandler((payload) => {
       icon: 'favicon.ico',
       data: { url: payload.data.url },
       actions: [{ action: 'open_url', title: '立刻查看' }],
-
     };
 
     // eslint-disable-next-line no-restricted-globals
-    return self.registration.showNotification(notificationTitle, notificationOptions);
+    return self.registration.showNotification(
+      notificationTitle,
+      notificationOptions,
+    );
   }
   return undefined;
 });
 
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('notificationclick', (e) => {
-  if (e.action === 'open_url') {
-    clients.openWindow(e.notification.data.url);
-  }
-},
-false);
+self.addEventListener(
+  'notificationclick',
+  (e) => {
+    if (e.action === 'open_url') {
+      clients.openWindow(e.notification.data.url);
+    }
+  },
+  false,
+);
 
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('message', () => {

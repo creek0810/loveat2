@@ -4,10 +4,13 @@ const API = {
   register: '/api/user/register',
 };
 function validatePassword() {
-  const confirmPassword = document.getElementById('register-confirm-password').value;
+  const confirmPassword = document.getElementById('register-confirm-password')
+    .value;
   const password = document.getElementById('register-password').value;
   if (confirmPassword !== password) {
-    document.getElementById('register-confirm-password').setCustomValidity('無法和密碼匹配');
+    document
+      .getElementById('register-confirm-password')
+      .setCustomValidity('無法和密碼匹配');
   } else {
     document.getElementById('register-confirm-password').setCustomValidity('');
   }
@@ -60,15 +63,21 @@ async function register() {
 }
 function authInit() {
   // add event listener
-  document.getElementById('login').addEventListener('click', login);
-  document.getElementById('register').addEventListener('click', register);
-  // reload after closing register-success-modal, login-frozen-modal
-  $('#register-success-modal, #login-frozen-modal').on('hide.bs.modal', () => {
-    window.location.reload();
+  document.getElementById('login-form').addEventListener('submit', () => {
+    login();
+    return false;
+  });
+  document.getElementById('register-form').addEventListener('submit', () => {
+    register();
+    return false;
   });
   // validate password when password or confirm password change
-  document.getElementById('register-password').addEventListener('keyup', validatePassword);
-  document.getElementById('register-confirm-password').addEventListener('keyup', validatePassword);
+  document
+    .getElementById('register-password')
+    .addEventListener('keyup', validatePassword);
+  document
+    .getElementById('register-confirm-password')
+    .addEventListener('keyup', validatePassword);
 }
 
 window.addEventListener('load', authInit);

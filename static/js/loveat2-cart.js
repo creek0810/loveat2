@@ -21,7 +21,6 @@ function deleteItem(e) {
   orderTotal();
 }
 
-
 function updateSum(id) {
   const order = myCart.get();
   document.getElementById(`item-sum-${id}`).innerHTML = order[id].price * order[id].quantity;
@@ -32,7 +31,7 @@ function changeQuantity(e) {
   const id = e.target.id.substr(9);
   const originQuantity = myCart.get()[id].quantity;
 
-  if ((newQuantity <= 0 || newQuantity > 99) || Number.isNaN(newQuantity)) {
+  if (newQuantity <= 0 || newQuantity > 99 || Number.isNaN(newQuantity)) {
     document.getElementById('hint-content').innerHTML = '輸入錯誤';
     document.getElementById('bussiness_data').style.display = 'none';
     $('#order-send-hint-modal').modal('show');
@@ -99,7 +98,9 @@ function checkStatus(status) {
 }
 
 async function sendOrder() {
-  const detailTime = $('#order-take-time').data('DateTimePicker').date();
+  const detailTime = $('#order-take-time')
+    .data('DateTimePicker')
+    .date();
   const takenTime = detailTime.format('YYYY-MM-DDTHH:mm');
   if (takenTime === null || Date.parse(takenTime).valueOf() < Date.now()) {
     document.getElementById('hint-content').innerHTML = '訂單錯誤或預定取餐時間未營業';
@@ -128,21 +129,29 @@ function setDiscription(e) {
 }
 
 function drawItem(data) {
-  const result = Object.keys(data).reduce((acc, key) => `${acc} <tr id="${key}">
+  const result = Object.keys(data).reduce(
+    (acc, key) => `${acc} <tr id="${key}">
               <td data-th="名稱 : ">${data[key].name}</td>
               <td data-th="數量 : ">
-                <input type="number" id="quantity-${key}" min="1" value="${data[key].quantity}" class="quantity-input form-control">
+                <input type="number" id="quantity-${key}" min="1" value="${
+  data[key].quantity
+}" class="quantity-input form-control">
               </td>
               <td data-th="價格 : ">${data[key].price}</td>
               <td data-th="備註 : ">
-                <input id="description-${key}" class="form-control description-input" type="text" value="${data[key].description}">
+                <input id="description-${key}" class="form-control description-input" type="text" value="${
+  data[key].description
+}">
               </td>
-              <td data-th="總共 : " id="item-sum-${key}" >${data[key].price * data[key].quantity}</td>
+              <td data-th="總共 : " id="item-sum-${key}" >${data[key].price
+      * data[key].quantity}</td>
               <td>
                 <button id="delete-${key}" class="btn btn-primary delete-item" type="button">Delete</button>
               </td>
-            </tr>`, '');
-    // draw it
+            </tr>`,
+    '',
+  );
+  // draw it
   document.querySelector('#cart-table tbody').innerHTML = result;
   // add event listener
   const quantityInput = document.getElementsByClassName('quantity-input');

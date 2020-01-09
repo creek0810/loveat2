@@ -1,6 +1,7 @@
-
 function delayURL(url, time) {
-  setTimeout(() => { window.location.href = `${url}`; }, time);
+  setTimeout(() => {
+    window.location.href = `${url}`;
+  }, time);
 }
 
 function init() {

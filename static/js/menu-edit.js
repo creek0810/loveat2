@@ -5,7 +5,6 @@
 const ID_TO_NAME = {}; // {"_id1":"name1"}
 const TYPE_DATA = {}; // {type1:{"id":[], "category":"item"}}
 
-
 const menuEditAPI = {
   all: '/api/menu',
   newType: '/api/menu/type/new',
@@ -16,7 +15,11 @@ const menuEditAPI = {
 };
 
 const ACTION_NUM = { ADD: 0, UPDATE: 1, DELETE: 2 };
-const reNameMsg = ['該種類已存在，請重新輸入。', '該種類已存在。', '該種類已存在。'];
+const reNameMsg = [
+  '該種類已存在，請重新輸入。',
+  '該種類已存在。',
+  '該種類已存在。',
+];
 const successfulMsg = ['成功新增！', '成功修改！', '成功刪除'];
 const action = ['add-type-txt', 'update-type-txt', 'delete-type-txt'];
 
@@ -37,7 +40,9 @@ function checkStatus(status, actionNum) {
 function searchByType(event) {
   const tarType = event.target[event.target.selectedIndex].id;
   if (tarType === 'type0') {
-    const menuTr = document.getElementById('menu-table').getElementsByTagName('tr');
+    const menuTr = document
+      .getElementById('menu-table')
+      .getElementsByTagName('tr');
     Array.from(menuTr).forEach((each) => {
       each.setAttribute('class', '');
     });
@@ -81,7 +86,10 @@ async function deleteItemOrCombo(e) {
 async function menuInit() {
   const descriptionTrs = document.getElementsByName('description');
   Array.from(descriptionTrs).forEach((eachDescription) => {
-    eachDescription.innerHTML = eachDescription.innerHTML.replace(/\n/g, '<br>');
+    eachDescription.innerHTML = eachDescription.innerHTML.replace(
+      /\n/g,
+      '<br>',
+    );
   });
   const menu = await FetchData.get(menuEditAPI.all).then((res) => res.json());
   menu.forEach((type, idx) => {
@@ -125,7 +133,6 @@ async function updateType() {
   }
 }
 
-
 async function deleteType() {
   const selection = document.getElementById('delete-type-list');
   const index = selection.selectedIndex;
@@ -141,8 +148,12 @@ function init() {
   observer.observe();
   menuInit();
   document.getElementById('add-type-btn').addEventListener('click', addType);
-  document.getElementById('update-type-btn').addEventListener('click', updateType);
-  document.getElementById('delete-type-btn').addEventListener('click', deleteType);
+  document
+    .getElementById('update-type-btn')
+    .addEventListener('click', updateType);
+  document
+    .getElementById('delete-type-btn')
+    .addEventListener('click', deleteType);
   document.getElementById('type-list').addEventListener('change', searchByType);
 }
 

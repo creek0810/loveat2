@@ -1,16 +1,19 @@
 /* global FetchData */
 const resetPasswordAPI = '/api/user/password/reset/';
 
-
 function delayURL(url, time) {
-  setTimeout(() => { window.location.href = `${url}`; }, time);
+  setTimeout(() => {
+    window.location.href = `${url}`;
+  }, time);
 }
 
 function validateNewPassword() {
   const confirmPassword = document.getElementById('confirm-new-password').value;
   const password = document.getElementById('new-password').value;
   if (confirmPassword !== password) {
-    document.getElementById('confirm-new-password').setCustomValidity('無法和密碼匹配');
+    document
+      .getElementById('confirm-new-password')
+      .setCustomValidity('無法和密碼匹配');
   } else {
     document.getElementById('confirm-new-password').setCustomValidity('');
   }
@@ -43,21 +46,21 @@ async function resetPassword() {
   }
 }
 
-
-function clickOnEnter(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById('reset-password-btn').click();
-  }
-}
-
 function init() {
   // add event listener
-  document.getElementById('reset-password-btn').addEventListener('click', resetPassword);
+  document
+    .getElementById('reset-password-form')
+    .addEventListener('submit', () => {
+      resetPassword();
+      return false;
+    });
   // validate password when password or confirm password change
-  document.getElementById('new-password').addEventListener('keyup', validateNewPassword);
-  document.getElementById('confirm-new-password').addEventListener('keyup', validateNewPassword);
-  document.getElementById('confirm-new-password').addEventListener('keyup', clickOnEnter);
+  document
+    .getElementById('new-password')
+    .addEventListener('keyup', validateNewPassword);
+  document
+    .getElementById('confirm-new-password')
+    .addEventListener('keyup', validateNewPassword);
 }
 
 window.addEventListener('load', init);

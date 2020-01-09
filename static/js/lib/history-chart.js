@@ -5,16 +5,48 @@ class HistoryChart {
   constructor() {
     // init color
     this.pieChartBG = [
-      '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
-      '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
+      '#60acfc',
+      '#32d3eb',
+      '#5bc49f',
+      '#feb64d',
+      '#ff7c7c',
+      '#9287e7',
+      '#27A1EA',
+      '#4EBECD',
+      '#9CDC82',
+      '#FF9F69',
     ];
     this.barChartBG = [
-      '#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c',
-      '#9287e7', '#27A1EA', '#4EBECD', '#9CDC82', '#FF9F69',
-      '#E9668E', '#747BE1', '#39B3EA', '#40CEC7', '#D4EC59',
-      '#FA816D', '#D660A8', '#6370DE', '#35C5EA', '#63D5B2',
-      '#FFDA43', '#FB6E6C', '#B55CBD', '#668ED6', '#9FCDFD',
-      '#FF79BC', '#FF9797', '#CA8EFF', '#019858', '#C48888',
+      '#60acfc',
+      '#32d3eb',
+      '#5bc49f',
+      '#feb64d',
+      '#ff7c7c',
+      '#9287e7',
+      '#27A1EA',
+      '#4EBECD',
+      '#9CDC82',
+      '#FF9F69',
+      '#E9668E',
+      '#747BE1',
+      '#39B3EA',
+      '#40CEC7',
+      '#D4EC59',
+      '#FA816D',
+      '#D660A8',
+      '#6370DE',
+      '#35C5EA',
+      '#63D5B2',
+      '#FFDA43',
+      '#FB6E6C',
+      '#B55CBD',
+      '#668ED6',
+      '#9FCDFD',
+      '#FF79BC',
+      '#FF9797',
+      '#CA8EFF',
+      '#019858',
+      '#C48888',
       '#0080FF',
     ];
 
@@ -31,9 +63,19 @@ class HistoryChart {
     const genderChart = document.getElementById('gender-pie-chart');
     const ageChart = document.getElementById('age-pie-chart');
 
-    this.allChart.femalePie = this.createPieChart(femaleChart, '女性各年齡銷售數量');
-    this.allChart.malePie = this.createPieChart(maleChart, '男性各年齡銷售數量');
-    this.allChart.genderPie = this.createPieChart(genderChart, '男女各銷售數量', ['女', '男']);
+    this.allChart.femalePie = this.createPieChart(
+      femaleChart,
+      '女性各年齡銷售數量',
+    );
+    this.allChart.malePie = this.createPieChart(
+      maleChart,
+      '男性各年齡銷售數量',
+    );
+    this.allChart.genderPie = this.createPieChart(
+      genderChart,
+      '男女各銷售數量',
+      ['女', '男'],
+    );
     this.allChart.agePie = this.createPieChart(ageChart, '各年齡層銷售數量');
   }
 
@@ -42,11 +84,22 @@ class HistoryChart {
     const itemData = data.itemAnalysis;
     const item = Object.keys(itemData);
     const ageInterval = data.interval;
-    const itemNum = Object.values(data.itemAnalysis).map((element) => element.total);
-    const femaleNum = Object.values(data.genderAnalysis).map((element) => element.female);
-    const maleNum = Object.values(data.genderAnalysis).map((element) => element.male);
-    const ageIntervalNum = Object.values(data.genderAnalysis).map((element) => element.total);
-    const genderNum = [femaleNum.reduce((a, b) => a + b), maleNum.reduce((a, b) => a + b)];
+    const itemNum = Object.values(data.itemAnalysis).map(
+      (element) => element.total,
+    );
+    const femaleNum = Object.values(data.genderAnalysis).map(
+      (element) => element.female,
+    );
+    const maleNum = Object.values(data.genderAnalysis).map(
+      (element) => element.male,
+    );
+    const ageIntervalNum = Object.values(data.genderAnalysis).map(
+      (element) => element.total,
+    );
+    const genderNum = [
+      femaleNum.reduce((a, b) => a + b),
+      maleNum.reduce((a, b) => a + b),
+    ];
 
     // update female pie
     this.allChart.femalePie.data.labels = ageInterval;
@@ -74,10 +127,12 @@ class HistoryChart {
       type: 'pie',
       data: {
         labels,
-        datasets: [{
-          label: 'Groups',
-          backgroundColor: this.pieChartBG,
-        }],
+        datasets: [
+          {
+            label: 'Groups',
+            backgroundColor: this.pieChartBG,
+          },
+        ],
       },
       options: {
         title: {
@@ -97,18 +152,22 @@ class HistoryChart {
     return new Chart(ctx, {
       type: 'bar',
       data: {
-        datasets: [{
-          label: dataSetLabel,
-          backgroundColor: this.barChartBG,
-        }],
+        datasets: [
+          {
+            label: dataSetLabel,
+            backgroundColor: this.barChartBG,
+          },
+        ],
       },
       options: {
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
             },
-          }],
+          ],
         },
       },
     });

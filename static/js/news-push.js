@@ -7,7 +7,9 @@ async function pushNews() {
   const form = document.getElementById('push-news-form');
   const formData = new FormData(form);
   const jsonData = {};
-  formData.forEach((value, key) => { jsonData[key] = value; });
+  formData.forEach((value, key) => {
+    jsonData[key] = value;
+  });
 
   // start loading gif
   document.getElementById('loadingDiv').style.display = 'block';
