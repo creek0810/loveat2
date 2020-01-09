@@ -1,9 +1,10 @@
 /* global FetchData */
 const sendEmailAPI = '/api/user/password/forget';
 
-
 function delayURL(url, time) {
-  setTimeout(() => { window.location.href = `${url}`; }, time);
+  setTimeout(() => {
+    window.location.href = `${url}`;
+  }, time);
 }
 
 async function sendResetRequest() {
@@ -36,10 +37,12 @@ async function sendResetRequest() {
 
 function init() {
   // add event listener
-  document.getElementById('forget-password-form').addEventListener('submit', () => {
-    sendResetRequest();
-    return false;
-  });
+  document
+    .getElementById('forget-password-form')
+    .addEventListener('submit', () => {
+      sendResetRequest();
+      return false;
+    });
 }
 
 window.addEventListener('load', init);

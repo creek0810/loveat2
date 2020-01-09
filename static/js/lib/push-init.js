@@ -15,7 +15,9 @@ firebase.initializeApp({
   appId: '1:1010525619811:web:25889ad1dfc18545b05a56',
 });
 const messaging = firebase.messaging();
-messaging.usePublicVapidKey('BMSp_k2JZITgK0Q7D2o3cnWsD_9bOqR8LYQTM4tTGWQXg_P_DZ5OGb3YWC-JmjuRkK1FrjpnGbH3BnSP17rtiXo');
+messaging.usePublicVapidKey(
+  'BMSp_k2JZITgK0Q7D2o3cnWsD_9bOqR8LYQTM4tTGWQXg_P_DZ5OGb3YWC-JmjuRkK1FrjpnGbH3BnSP17rtiXo',
+);
 
 function getTokenAndSend() {
   messaging.getToken().then((token) => {
@@ -31,7 +33,10 @@ function requestPermission() {
   const nav = document.getElementById('settingDropDown');
   // check if user login
   if (nav != null) {
-    if (Notification.permission === 'default' || Notification.permission === 'undefined') {
+    if (
+      Notification.permission === 'default'
+      || Notification.permission === 'undefined'
+    ) {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
           getTokenAndSend();

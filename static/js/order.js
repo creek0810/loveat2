@@ -25,7 +25,6 @@ function showReasonForm(id) {
   rejectId = id;
 }
 
-
 function clickFormBtn() {
   const { form } = document.forms;
   const reason = form.elements.reason.value;

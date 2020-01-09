@@ -22,8 +22,14 @@ class Cart {
             comboList.push(key);
           }
         });
-        const itemResult = await FetchData.post('/api/menu/item', itemList).then((res) => res.json());
-        const comboResult = await FetchData.post('/api/menu/combo', comboList).then((res) => res.json());
+        const itemResult = await FetchData.post(
+          '/api/menu/item',
+          itemList,
+        ).then((res) => res.json());
+        const comboResult = await FetchData.post(
+          '/api/menu/combo',
+          comboList,
+        ).then((res) => res.json());
         itemResult.forEach((cur) => {
           this.content[cur._id].price = cur.price;
           this.content[cur._id].name = cur.name;

@@ -4,10 +4,13 @@ const API = {
   register: '/api/user/register',
 };
 function validatePassword() {
-  const confirmPassword = document.getElementById('register-confirm-password').value;
+  const confirmPassword = document.getElementById('register-confirm-password')
+    .value;
   const password = document.getElementById('register-password').value;
   if (confirmPassword !== password) {
-    document.getElementById('register-confirm-password').setCustomValidity('無法和密碼匹配');
+    document
+      .getElementById('register-confirm-password')
+      .setCustomValidity('無法和密碼匹配');
   } else {
     document.getElementById('register-confirm-password').setCustomValidity('');
   }
@@ -69,8 +72,12 @@ function authInit() {
     return false;
   });
   // validate password when password or confirm password change
-  document.getElementById('register-password').addEventListener('keyup', validatePassword);
-  document.getElementById('register-confirm-password').addEventListener('keyup', validatePassword);
+  document
+    .getElementById('register-password')
+    .addEventListener('keyup', validatePassword);
+  document
+    .getElementById('register-confirm-password')
+    .addEventListener('keyup', validatePassword);
 }
 
 window.addEventListener('load', authInit);
