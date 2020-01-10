@@ -3,7 +3,9 @@ const NEWS_API = {
   push: '/api/setting/news',
 };
 
-async function pushNews() {
+async function pushNews(e) {
+  // prohibit refresh
+  e.preventDefault();
   const form = document.getElementById('push-news-form');
   const formData = new FormData(form);
   const jsonData = {};
@@ -25,10 +27,9 @@ async function pushNews() {
   document.getElementById('loadingImg').style.display = 'none';
 }
 function init() {
-  document.getElementById('push-news-form').addEventListener('submit', () => {
-    pushNews();
-    return false;
-  });
+  document
+    .getElementById('push-news-form')
+    .addEventListener('submit', pushNews);
 }
 
 window.addEventListener('load', init);

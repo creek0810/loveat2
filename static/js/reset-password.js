@@ -19,7 +19,9 @@ function validateNewPassword() {
   }
 }
 
-async function resetPassword() {
+async function resetPassword(e) {
+  // prohibit refresh
+  e.preventDefault();
   // resolve API address problem
   const address = window.location.href;
   const tmp = address.match('reset/');
@@ -50,10 +52,7 @@ function init() {
   // add event listener
   document
     .getElementById('reset-password-form')
-    .addEventListener('submit', () => {
-      resetPassword();
-      return false;
-    });
+    .addEventListener('submit', resetPassword);
   // validate password when password or confirm password change
   document
     .getElementById('new-password')

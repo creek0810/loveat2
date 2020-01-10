@@ -7,7 +7,9 @@ function delayURL(url, time) {
   }, time);
 }
 
-async function sendResetRequest() {
+async function sendResetRequest(e) {
+  // prohibit refresh
+  e.preventDefault();
   // validate field and show hint
   if (document.forms['forget-password-form'].reportValidity()) {
     // start post
@@ -39,10 +41,7 @@ function init() {
   // add event listener
   document
     .getElementById('forget-password-form')
-    .addEventListener('submit', () => {
-      sendResetRequest();
-      return false;
-    });
+    .addEventListener('submit', sendResetRequest);
 }
 
 window.addEventListener('load', init);
