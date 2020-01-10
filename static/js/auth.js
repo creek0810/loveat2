@@ -15,7 +15,9 @@ function validatePassword() {
     document.getElementById('register-confirm-password').setCustomValidity('');
   }
 }
-async function login() {
+async function login(e) {
+  // disable auto refresh
+  e.preventDefault();
   // validate field and show hint
   if (document.forms['login-form'].reportValidity()) {
     // start post
@@ -39,7 +41,9 @@ async function login() {
   }
 }
 
-async function register() {
+async function register(e) {
+  // disable auto refresh
+  e.preventDefault();
   // clear register-wrong content
   document.getElementById('register-wrong').innerText = '　';
   // validate filed and show hint
@@ -63,13 +67,11 @@ async function register() {
 }
 function authInit() {
   // add event listener
-  document.getElementById('login-form').addEventListener('submit', () => {
-    login();
-    return false;
-  });
-  document.getElementById('register-form').addEventListener('submit', () => {
-    register();
-    return false;
+  document.getElementById('login-form').addEventListener('submit', login);
+  document.getElementById('register-form').addEventListener('submit', register);
+  // reload after closing register-success-modal, login-frozen-modal
+  $('#register-success-modal, #login-frozen-modal').on('hide.bs.modal', () => {
+    window.location.reload();
   });
   // validate password when password or confirm password change
   document
