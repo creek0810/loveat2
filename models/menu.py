@@ -8,7 +8,7 @@ from lib.custom_except import duplicateError
 from models import db
 
 
-def combine_top(category, menu_list, top_list):
+def combine_top(menu_list, top_list):
     for product in menu_list:
         for content in list(product["content"]):
             content["_id"] = str(content["_id"])
@@ -85,8 +85,8 @@ def get_all():
     top_item = get_top_sell("item")
     top_combo = get_top_sell("combo")
 
-    item = combine_top("item", item_result, top_item)
-    combo = combine_top("combo", combo_result, top_combo)
+    item = combine_top(item_result, top_item)
+    combo = combine_top(combo_result, top_combo)
 
     return item + combo
 
