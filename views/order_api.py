@@ -68,16 +68,22 @@ def add_order():
 def update_order_state():
     data = request.get_json()
     result = order.update_state(data)
+
     try:
         cancel_content = data["content"]
     except KeyError:
         cancel_content = ""
 
+    try:
+        orderID = result["orderID"]
+    except TypeError:
+        orderID = ""
+
     if data["state"] == "end":
         order.update_food_amount(data)
 
     message = {
-        "doing": {"title": "訂單已接受", "content": "老闆已接受您的訂單"},
+        "doing": {"title": "訂單已接受", "content": "老闆已接受您的訂單，編號: " + orderID},
         "cancel": {
             "title": "訂單被拒絕",
             "content": "抱歉，老闆拒絕了您的訂單, 拒絕原因為：" + cancel_content,
