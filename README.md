@@ -6,8 +6,15 @@
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/creek0810/loveat2)
 [![codecov](https://codecov.io/gh/creek0810/loveat2/branch/master/graph/badge.svg)](https://codecov.io/gh/creek0810/loveat2)
 
+Final Project for NTOU 2019 Software Engineering.
+A breakfast online shopping site.
+
 ## Documentation
-[API](https://app.swaggerhub.com/apis-docs/creek0810/loveat2/1.0.0#/)
+- [API](https://app.swaggerhub.com/apis-docs/creek0810/loveat2/1.0.0#/)
+- [SRS](https://github.com/creek0810/loveat2/blob/master/report/8-Loveat2-SRS.pdf)
+- [SDD](https://github.com/creek0810/loveat2/blob/master/report/8-Loveat2-SDD.pdf)
+- [STD](https://github.com/creek0810/loveat2/blob/master/report/8-Loveat2-STD.pdf)
+- [Workflow & Tool](https://github.com/creek0810/loveat2/blob/master/report/README.md)
 
 ## Built With
 - [Bootstrap](https://getbootstrap.com/)
@@ -15,7 +22,6 @@
 - [Bootstrap datetimepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
 
 ## Authors
-
 - **Chieh Ju Yu** [lucy4116411](https://github.com/lucy4116411)
 - **Li Ting Huang** [linda880605](https://github.com/linda880605)
 - **Pei Tzu Li** [muyumiya1201](https://github.com/muyumiya1201)
