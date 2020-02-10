@@ -8,3 +8,4 @@ config.pyc
 secrets.tar
 loveat2-push.json
 .vscode/
+htmlcov/

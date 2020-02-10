@@ -4,6 +4,7 @@ ignore:
   - "config_example.py"
   - "views/*_web.py"
   - "views/root.py"
+  - "tests/"
 coverage:
   precision: 2
   round: down

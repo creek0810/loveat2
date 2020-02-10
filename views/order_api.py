@@ -51,7 +51,7 @@ def add_order():
                     "title": "新訂單",
                     "content": "您有新訂單",
                     "url": url_for("order_web.pending", _externale=True),
-                    "detail": json.dumps(cur_order),
+                    "detail": "",
                     "type": "admin-order-new",
                 },
                 push.TOPIC_ADMIN,

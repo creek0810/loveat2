@@ -9,20 +9,19 @@ MAX_ORDERID = -1
 
 # projection for unknown page
 UNKNOWN_PROJECT = [
-    {"$project": {"content.id": 0, "content.category": 0}},
     {
-        "$project": {
+        "$addFields": {
             "_id": {"$toString": "$_id"},
-            "takenAt": {
+            "takenaAt": {
                 "$dateToString": {
                     "format": "%Y/%m/%d %H:%M",
                     "date": "$takenAt",
                 }
             },
-            "content": 1,
-            "notes": 1,
         }
     },
+    {"$project": {"content": 1, "notes": 1, "takenAt": 1}},
+    {"$project": {"content.id": 0, "content.category": 0}},
 ]
 
 
@@ -35,7 +34,7 @@ def get_raw_history(start, end):
         find_by_time(start, end),
         {
             "content.id": 0,
-            "content.type": 0,
+            "content.category": 0,
             "_id": 0,
             "takenAt": 0,
             "state": 0,
@@ -323,10 +322,10 @@ def update_food_amount(data):
     )
     for meal in result["content"]:
         if meal["category"] == "item":
-            db.ITEM_COLLECTION.update(
+            db.ITEM_COLLECTION.update_one(
                 {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
             )
         if meal["category"] == "combo":
-            db.COMBO_COLLECTION.update(
+            db.COMBO_COLLECTION.update_one(
                 {"name": meal["name"]}, {"$inc": {"sell": meal["quantity"]}}
             )
