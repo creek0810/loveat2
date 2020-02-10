@@ -1,6 +1,27 @@
 import datetime
 
-from models import business_time, menu, order
+from bson import ObjectId
+
+from freezegun import freeze_time
+
+from models import business_time, menu, order, user
+
+
+class TestUserModel(object):
+    def test_get_user_info(self, mockdb):
+        tmp = list(user.get_user_info("5dd8a604371301b428df5602"))
+        assert tmp == [
+            {
+                "_id": ObjectId("5dd8a604371301b428df5602"),
+                "userName": "admin_name",
+                "gender": "female",
+                "phone": "0920198409",
+                "email": "admin@gmail.com",
+                "birth": datetime.datetime(1999, 11, 21, 23, 10, 42, 908000),
+                "avatar": "64c4638b-b6ae-4335-80ec-1441e346b4e9",
+                "state": "activate",
+            }
+        ]
 
 
 class TestBusinessTimeModel(object):
@@ -25,7 +46,7 @@ class TestOrderModel(object):
                 "_id": "5dd8f94ff5a90a5568400a57",
                 "takenAt": datetime.datetime(2019, 11, 23, 18, 8, 7, 908000),
                 "content": [
-                    {"quantity": 1, "name": "西西里雞腿堡"},
+                    {"quantity": 1, "name": "鐵板麵套餐"},
                     {"quantity": 2, "name": "起司豬排蛋堡"},
                 ],
                 "notes": "漢堡加蛋",
@@ -35,6 +56,36 @@ class TestOrderModel(object):
                 "takenAt": datetime.datetime(2019, 11, 23, 21, 30, 7, 954000),
                 "content": [{"quantity": 2, "name": "火腿蛋吐司"}],
                 "notes": "吐司不加美乃滋",
+            },
+        ]
+
+    @freeze_time("2008-02-10 10:00:00")
+    def test_get_not_end_by_username(self, mockdb):
+        result = list(order.get_not_end_by_username("customer_name"))
+        assert result == [
+            {
+                "_id": "5dd8f94ff5a90a5568400a57",
+                "content": [
+                    {"category": "combo", "name": "鐵板麵套餐", "quantity": 1},
+                    {"category": "item", "name": "起司豬排蛋堡", "quantity": 2},
+                ],
+                "notes": "漢堡加蛋",
+                "orderID": "2",
+                "state": "unknown",
+                "takenAt": "2019/11/23 18:08",
+            },
+            {
+                "_id": "5dd8f94ff5a90a5568400a58",
+                "content": [
+                    {"category": "item", "name": "起司豬排蛋吐司", "quantity": 2},
+                    {"category": "item", "name": "原味蛋餅", "quantity": 2},
+                    {"category": "item", "name": "火腿蛋吐司", "quantity": 3},
+                    {"category": "item", "name": "培根蛋吐司", "quantity": 1},
+                ],
+                "notes": "吐司不加美乃滋",
+                "orderID": "3",
+                "state": "doing",
+                "takenAt": "2019/11/23 17:18",
             },
         ]
 

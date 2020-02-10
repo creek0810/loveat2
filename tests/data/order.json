@@ -14,13 +14,13 @@
         "content": [
             {
                 "id": {
-                    "$oid": "5dd688d30e5cb17b1d4d29fd"
+                    "$oid": "5dda567d09d84aa89699121c"
                 },
-                "category": "item",
+                "category": "combo",
                 "quantity": {
                     "$numberInt": "1"
                 },
-                "name": "\u897f\u897f\u91cc\u96de\u817f\u5821"
+                "name": "鐵板麵套餐"
             },
             {
                 "id": {

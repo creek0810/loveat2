@@ -46,8 +46,8 @@ def admin_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if (
-            current_user.is_authenticated
-            and current_user.get_role() == "admin"
+            current_user.get_role() == "admin"
+            and current_user.is_authenticated
         ):
             return f(*args, **kwargs)
         else:

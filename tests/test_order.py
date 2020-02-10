@@ -106,6 +106,8 @@ class TestOrder(object):
 
     # update order state
     def test_update_success(self, client, admin):
+        # TODO: check when order is updated to "finish",
+        #  then update the "sell" field of item and combo
         url = URL_PREFIX + "/update"
         state_enum = ["doing", "cancel", "finish", "end"]
         for state in state_enum:
