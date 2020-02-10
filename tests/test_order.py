@@ -2,7 +2,10 @@ import json
 
 from bson.objectid import ObjectId
 
+from freezegun import freeze_time
+
 from models import db
+
 
 URL_PREFIX = "/api/order"
 
@@ -35,6 +38,7 @@ class TestOrder(object):
     update_order_id = "5dd8f94ff5a90a5568400a57"
     update_nonexist_order_id = "6dd8f94ff5a90a5568400a57"
 
+    @freeze_time("2020-02-10 10:00:00")
     def test_add_success(self, client, customer):
         url = URL_PREFIX + "/new"
         rv = client.post(
@@ -44,6 +48,41 @@ class TestOrder(object):
         )
         assert rv.status_code == 200
 
+    @freeze_time("2020-02-10 10:00:00")
+    def test_add_by_frozen(self, client, frozen):
+        # test add api
+        url = URL_PREFIX + "/new"
+        rv = client.post(
+            url,
+            data=json.dumps(self.new_order),
+            content_type="application/json",
+        )
+        assert rv.status_code == 403
+
+    @freeze_time("2020-02-10 10:00:00")
+    def test_add_taken_past(self, client, customer):
+        # test add api
+        url = URL_PREFIX + "/new"
+        cur_order = self.new_order.copy()
+        cur_order["takenAt"] = "2020-02-08T11:00"
+        rv = client.post(
+            url, data=json.dumps(cur_order), content_type="application/json"
+        )
+        assert rv.status_code == 422
+
+    @freeze_time("2020-02-10 10:00:00")
+    def test_add_taken_not_in_business_interval(self, client, customer):
+        # test add api
+        url = URL_PREFIX + "/new"
+        # change "takenAt" to the time that not in business interval
+        cur_order = self.new_order.copy()
+        cur_order["takenAt"] = "2020-02-11T23:00"
+        rv = client.post(
+            url, data=json.dumps(cur_order), content_type="application/json"
+        )
+        assert rv.status_code == 422
+
+    @freeze_time("2020-02-10 10:00:00")
     def test_add_unauthorized(self, client):
         # test add api
         url = URL_PREFIX + "/new"
@@ -54,6 +93,7 @@ class TestOrder(object):
         )
         assert rv.status_code == 401
 
+    @freeze_time("2020-02-10 10:00:00")
     def test_add_wrong_format(self, client, customer):
         # test add api
         url = URL_PREFIX + "/new"

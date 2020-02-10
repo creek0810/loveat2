@@ -7,6 +7,7 @@ from flask import Blueprint, jsonify, request, url_for
 
 from flask_login import current_user, login_required
 
+import google.auth.exceptions
 
 from lib import push
 from lib.auth import admin_required
@@ -46,17 +47,21 @@ def add_order():
     try:
         cur_order = order.add_order(data)
         if cur_order:
-            push.send_to_topic(
-                {
-                    "title": "新訂單",
-                    "content": "您有新訂單",
-                    "url": url_for("order_web.pending", _externale=True),
-                    "detail": "",
-                    "type": "admin-order-new",
-                },
-                push.TOPIC_ADMIN,
-            )
-            return "", 200
+            try:
+                push.send_to_topic(
+                    {
+                        "title": "新訂單",
+                        "content": "您有新訂單",
+                        "url": url_for("order_web.pending", _externale=True),
+                        "detail": "",
+                        "type": "admin-order-new",
+                    },
+                    push.TOPIC_ADMIN,
+                )
+            except google.auth.exception.RefreshError:
+                pass
+            finally:
+                return "", 200
         else:
             return "", 422
     except KeyError:

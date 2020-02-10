@@ -157,3 +157,14 @@ def admin(client):
         content_type="application/json",
     )
     client.get("/user/logout")
+
+
+@pytest.fixture(scope="function")
+def frozen(client):
+    info = {"userName": "frozen_account", "password": "123456789"}
+    yield client.post(
+        "/api/user/login",
+        data=json.dumps(info),
+        content_type="application/json",
+    )
+    client.get("/user/logout")

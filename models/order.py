@@ -202,7 +202,7 @@ def add_order(data):
     business_time = business_time[taken_at.isoweekday() - 1]
     start = build_business_time(business_time["start"])
     end = build_business_time(business_time["end"])
-
+    print(datetime.now(), taken_at)
     # check if content is empty, takenAt is > now and in business interval
     if (
         start <= taken_at <= end

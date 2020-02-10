@@ -1,4 +1,6 @@
-from models import business_time, menu
+import datetime
+
+from models import business_time, menu, order
 
 
 class TestBusinessTimeModel(object):
@@ -16,18 +18,25 @@ class TestBusinessTimeModel(object):
 
 
 class TestOrderModel(object):
-    """ can't work, because mongomock doesn't support $dateToString
     def test_get_unknown_order(self, mockdb):
-        result = order.get_unknown_order()
-        assert result == {}
-    """
-
-    """ can't work, because mongomock doesn't support $toInt
-    def test_get_todo_order(self, mockdb):
-        result = order.get_todo_order()
-        assert result == {}
-    """
-    pass
+        result = list(order.get_unknown_order())
+        assert result == [
+            {
+                "_id": "5dd8f94ff5a90a5568400a57",
+                "takenAt": datetime.datetime(2019, 11, 23, 18, 8, 7, 908000),
+                "content": [
+                    {"quantity": 1, "name": "西西里雞腿堡"},
+                    {"quantity": 2, "name": "起司豬排蛋堡"},
+                ],
+                "notes": "漢堡加蛋",
+            },
+            {
+                "_id": "5dd8f94ff5a90a5568400a5a",
+                "takenAt": datetime.datetime(2019, 11, 23, 21, 30, 7, 954000),
+                "content": [{"quantity": 2, "name": "火腿蛋吐司"}],
+                "notes": "吐司不加美乃滋",
+            },
+        ]
 
 
 class TestTypeModel(object):
