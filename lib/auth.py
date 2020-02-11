@@ -45,7 +45,10 @@ def user_loader(id):
 def admin_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if current_user.is_authenticated and current_user.role == "admin":
+        if (
+            current_user.get_role() == "admin"
+            and current_user.is_authenticated
+        ):
             return f(*args, **kwargs)
         else:
             abort(403)

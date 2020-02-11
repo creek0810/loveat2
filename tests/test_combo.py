@@ -80,7 +80,6 @@ class TestCombo(object):
         ]
     """
 
-    """ can't run, because mongomock doesn't support addfields
     def test_get_combo_empty(self, client):
         # check get combo api
         url = URL_PREFIX
@@ -91,7 +90,7 @@ class TestCombo(object):
         )
         assert json.loads(rv.data) == []
         assert rv.status_code == 200
-    """
+
     # update combo
     def test_update_combo_unauthorized(self, client):
         url = URL_PREFIX + "/update"

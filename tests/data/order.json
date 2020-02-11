@@ -14,19 +14,19 @@
         "content": [
             {
                 "id": {
-                    "$oid": "5dd688d30e5cb17b1d4d29fd"
+                    "$oid": "5dda567d09d84aa89699121c"
                 },
-                "type": "item",
+                "category": "combo",
                 "quantity": {
                     "$numberInt": "1"
                 },
-                "name": "\u897f\u897f\u91cc\u96de\u817f\u5821"
+                "name": "鐵板麵套餐"
             },
             {
                 "id": {
                     "$oid": "5dd688d30e5cb17b1d4d29ff"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "2"
                 },
@@ -60,7 +60,7 @@
                 "id": {
                     "$oid": "5dd6899bd268a673de091ed9"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "2"
                 },
@@ -70,7 +70,7 @@
                 "id": {
                     "$oid": "5dd68abb0fb2aef0c498659a"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "2"
                 },
@@ -80,7 +80,7 @@
                 "id": {
                     "$oid": "5dd6899cd268a673de091edb"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "3"
                 },
@@ -90,7 +90,7 @@
                 "id": {
                     "$oid": "5dd6899dd268a673de091edc"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "1"
                 },
@@ -124,7 +124,7 @@
                 "id": {
                     "$oid": "5dd6a6e0b1ee120dfb88775b"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "2"
                 },
@@ -158,7 +158,7 @@
                 "id": {
                     "$oid": "5dd6899cd268a673de091edb"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "2"
                 },
@@ -192,7 +192,7 @@
                 "id": {
                     "$oid": "5dd6899cd268a673de091edb"
                 },
-                "type": "item",
+                "category": "item",
                 "quantity": {
                     "$numberInt": "2"
                 },
